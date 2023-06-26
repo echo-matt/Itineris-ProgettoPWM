@@ -1,4 +1,4 @@
-package com.matteopaterno.progettopwm;
+package com.matteopaterno.progettopwm.retrofit;
 
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
@@ -21,7 +21,7 @@ public interface UserAPI {
     fun remove(@Field("query") query: String): Call<JsonObject>
     @POST("postInsert/")
     @FormUrlEncoded
-    fun unsert(@Field("query") query: String): Call <JsonObject>
+    fun insert(@Field("query") query: String): Call <JsonObject>
     @GET
     fun image(@Url url: String) : Call <ResponseBody>
 }

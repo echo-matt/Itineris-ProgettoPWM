@@ -1,24 +1,26 @@
 package com.matteopaterno.progettopwm
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.matteopaterno.progettopwm.databinding.ActivityMainBinding
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
 
-    val retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/webmobile/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(UserAPI::class.java)
-    }
+
 
     private lateinit var binding : ActivityMainBinding
 
@@ -68,5 +70,9 @@ class MainActivity : AppCompatActivity() {
         showMyFragments += "Number of Fragments: $entryInBackStack"
         Toast.makeText(this, showMyFragments, Toast.LENGTH_SHORT).show()
     }
+
+
+
+
 
 }
