@@ -11,21 +11,24 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.matteopaterno.progettopwm.databinding.ActivityProfileBinding
 
 class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var binding: ActivityProfileBinding
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityProfileBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        drawerLayout = binding.drawerLayout
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
-        val navigationView = findViewById<NavigationView>(R.id.nav)
+        val navigationView = binding.nav
         navigationView.setNavigationItemSelectedListener(this)
 
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav)
@@ -35,7 +38,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, RistorantiFragment()).commit()
+                .replace(binding.frameLayout.id, RistorantiFragment()).commit()
             navigationView.setCheckedItem(R.id.ristoranti)
         }
     }
