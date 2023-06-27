@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="175dp"
+    android:background="#449de9"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="101dp"
+        android:layout_height="78dp"
+        android:layout_gravity="left"
+        android:src="@drawable/face_account" />
+
+    <TextView
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="15dp"
+        android:padding="@dimen/cardview_compat_inset_shadow"
+        android:text="Steve Jobs"/>
+
+</LinearLayout>

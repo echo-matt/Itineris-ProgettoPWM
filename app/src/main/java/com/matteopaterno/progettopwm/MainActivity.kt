@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import com.matteopaterno.progettopwm.databinding.ActivityMainBinding
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
