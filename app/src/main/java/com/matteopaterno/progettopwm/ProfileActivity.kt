@@ -15,15 +15,16 @@ import com.matteopaterno.progettopwm.databinding.ActivityProfileBinding
 
 class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var binding: ActivityProfileBinding
+    private var binding = ActivityProfileBinding.inflate(layoutInflater)
+
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityProfileBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         drawerLayout = binding.drawerLayout
+
 
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
@@ -38,7 +39,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(binding.frameLayout.id, RistorantiFragment()).commit()
+                .replace(binding.fragmentContainer.id, RistorantiFragment()).commit()
             navigationView.setCheckedItem(R.id.ristoranti)
         }
     }
@@ -46,7 +47,7 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.ristoranti -> supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, RistorantiFragment()).commit()
+                .replace(binding.fragmentContainer.id, RistorantiFragment()).commit()
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

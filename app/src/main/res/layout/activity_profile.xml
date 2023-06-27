@@ -23,9 +23,9 @@
             android:id="@+id/toolbar"
             app:title="Toolbar"/>
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:layout_width="match_parent"
-            android:id="@+id/frameLayout"
+            android:id="@+id/fragment_container"
             android:layout_height="match_parent"/>
 
     </LinearLayout>
