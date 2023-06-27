@@ -15,11 +15,12 @@ import com.matteopaterno.progettopwm.databinding.ActivityProfileBinding
 
 class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawerLayout: DrawerLayout
-    private var binding = ActivityProfileBinding.inflate(layoutInflater)
+    private lateinit var binding : ActivityProfileBinding
 
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityProfileBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
@@ -39,15 +40,18 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(binding.fragmentContainer.id, RistorantiFragment()).commit()
-            navigationView.setCheckedItem(R.id.ristoranti)
+                .replace(binding.fragmentContainer.id, HomeFragment()).commit()
+            navigationView.setCheckedItem(R.id.home)
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        binding = ActivityProfileBinding.inflate(layoutInflater)
         when (item.itemId) {
             R.id.ristoranti -> supportFragmentManager.beginTransaction()
                 .replace(binding.fragmentContainer.id, RistorantiFragment()).commit()
+            R.id.home -> supportFragmentManager.beginTransaction()
+                .replace(binding.fragmentContainer.id, HomeFragment()).commit()
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
