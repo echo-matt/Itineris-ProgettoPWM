@@ -52,6 +52,10 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 .replace(binding.fragmentContainer.id, RistorantiFragment()).commit()
             R.id.home -> supportFragmentManager.beginTransaction()
                 .replace(binding.fragmentContainer.id, HomeFragment()).commit()
+            R.id.hotel -> supportFragmentManager.beginTransaction()
+                .replace(binding.fragmentContainer.id, HotelFragment()).commit()
+            R.id.luoghi -> supportFragmentManager.beginTransaction()
+                .replace(binding.fragmentContainer.id, LuoghiFragment()).commit()
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

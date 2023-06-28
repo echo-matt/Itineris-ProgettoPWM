@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +22,14 @@ class RistorantiFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private lateinit var adapter: RistorantiAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var ristorantiArray : ArrayList<Ristoranti>
+
+    lateinit var imageId : Array<Int>
+    lateinit var text : Array<String>
+    lateinit var ristoranti: Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,4 +66,41 @@ class RistorantiFragment : Fragment() {
                 }
             }
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataInitialize()
+        val layoutManager = LinearLayoutManager(context)
+        recyclerView = view.findViewById(R.id.recyclerviewRistoranti)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.setHasFixedSize(true)
+        adapter = RistorantiAdapter(ristorantiArray)
+        recyclerView.adapter = adapter
+    }
+
+
+    private fun dataInitialize() {
+
+        ristorantiArray = arrayListOf<Ristoranti>()
+
+        imageId = arrayOf(
+            R.drawable.a,
+            R.drawable.b,
+            R.drawable.c,
+            R.drawable.d,
+            R.drawable.e,
+            R.drawable.f,
+        )
+
+        text = arrayOf(
+            getString(R.string.head_1)
+        )
+
+        for (i in imageId.indices) {
+            val ristoranti = Ristoranti(imageId[i], text[i])
+            ristorantiArray.add(ristoranti)
+        }
+
+    }
+
 }

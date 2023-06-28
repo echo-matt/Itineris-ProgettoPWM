@@ -17,4 +17,11 @@
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
 
+    <string name="head_1">Ristorante a</string>
+    <string name="head_2">Ristorante b</string>
+    <string name="head_3">Ristorante c</string>
+    <string name="head_4">Ristorante d</string>
+    <string name="head_5">Ristorante e</string>
+    <string name="head_6">Ristorante f</string>
+
 </resources>

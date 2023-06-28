@@ -21,7 +21,7 @@
             android:background="#449de9"
             android:elevation="3dp"
             android:id="@+id/toolbar"
-            app:title="Toolbar"/>
+            app:title=" "/>
 
         <androidx.fragment.app.FragmentContainerView
             android:layout_width="match_parent"
