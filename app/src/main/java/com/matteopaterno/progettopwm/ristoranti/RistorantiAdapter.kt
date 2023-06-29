@@ -1,4 +1,4 @@
-package com.matteopaterno.progettopwm
+package com.matteopaterno.progettopwm.ristoranti
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
+import com.matteopaterno.progettopwm.R
 
 class RistorantiAdapter(private val ristorantiDataList: ArrayList<RistorantiData>) : RecyclerView.Adapter<RistorantiAdapter.MyViewHolder>() {
 

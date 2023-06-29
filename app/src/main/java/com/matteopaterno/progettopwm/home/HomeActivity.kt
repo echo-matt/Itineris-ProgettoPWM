@@ -1,4 +1,4 @@
-package com.matteopaterno.progettopwm
+package com.matteopaterno.progettopwm.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,10 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.ActivityProfileBinding
 import com.matteopaterno.progettopwm.hotel.HotelFragment
+import com.matteopaterno.progettopwm.ristoranti.RistorantiFragment
 
-class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var binding : ActivityProfileBinding
 
@@ -31,7 +33,10 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         val navigationView = binding.nav
         navigationView.setNavigationItemSelectedListener(this)
 
-        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav)
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
+            R.string.open_nav,
+            R.string.close_nav
+        )
 
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()

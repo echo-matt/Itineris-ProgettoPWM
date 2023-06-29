@@ -1,4 +1,4 @@
-package com.matteopaterno.progettopwm
+package com.matteopaterno.progettopwm.loginregister
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.matteopaterno.progettopwm.home.HomeActivity
 import com.matteopaterno.progettopwm.databinding.FragmentLoginBinding
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
 import retrofit2.Call
@@ -56,7 +57,7 @@ class LoginFragment : Fragment() {
                     if(response.isSuccessful){
                         if ((response.body()?.get("queryset") as JsonArray).size() == 1){
                             Toast.makeText(activity, "Select successful", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(context, ProfileActivity::class.java)
+                            val intent = Intent(context, HomeActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
                         }else{
