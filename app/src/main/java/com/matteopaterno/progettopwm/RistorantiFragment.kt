@@ -25,7 +25,7 @@ class RistorantiFragment : Fragment() {
 
     private lateinit var adapter: RistorantiAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var ristorantiArray : ArrayList<Ristoranti>
+    private lateinit var ristorantiDataArray : ArrayList<RistorantiData>
 
     lateinit var imageId : Array<Int>
     lateinit var text : Array<String>
@@ -74,14 +74,14 @@ class RistorantiFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerviewRistoranti)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        adapter = RistorantiAdapter(ristorantiArray)
+        adapter = RistorantiAdapter(ristorantiDataArray)
         recyclerView.adapter = adapter
     }
 
 
     private fun dataInitialize() {
 
-        ristorantiArray = arrayListOf<Ristoranti>()
+        ristorantiDataArray = arrayListOf<RistorantiData>()
 
         imageId = arrayOf(
             R.drawable.a,
@@ -97,8 +97,8 @@ class RistorantiFragment : Fragment() {
         )
 
         for (i in imageId.indices) {
-            val ristoranti = Ristoranti(imageId[i], text[i])
-            ristorantiArray.add(ristoranti)
+            val ristorantiData = RistorantiData(imageId[i], text[i])
+            ristorantiDataArray.add(ristorantiData)
         }
 
     }
