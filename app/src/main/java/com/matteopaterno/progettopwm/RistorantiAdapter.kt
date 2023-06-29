@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 
-class RistorantiAdapter(private val ristorantiList: ArrayList<Ristoranti>) : RecyclerView.Adapter<RistorantiAdapter.MyViewHolder>() {
+class RistorantiAdapter(private val ristorantiDataList: ArrayList<RistorantiData>) : RecyclerView.Adapter<RistorantiAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.lista_ristoranti, parent, false)
@@ -15,11 +15,11 @@ class RistorantiAdapter(private val ristorantiList: ArrayList<Ristoranti>) : Rec
     }
 
     override fun getItemCount(): Int {
-        return ristorantiList.size
+        return ristorantiDataList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = ristorantiList[position]
+        val currentItem = ristorantiDataList[position]
         holder.titleImage.setImageResource(currentItem.image)
         holder.tvHeading.text = currentItem.text
     }
