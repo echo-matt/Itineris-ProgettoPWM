@@ -3,15 +3,13 @@ package com.matteopaterno.progettopwm
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.Window
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.matteopaterno.progettopwm.databinding.ActivityProfileBinding
+import com.matteopaterno.progettopwm.hotel.HotelFragment
 
 class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawerLayout: DrawerLayout
@@ -54,8 +52,6 @@ class ProfileActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 .replace(binding.fragmentContainer.id, HomeFragment()).commit()
             R.id.hotel -> supportFragmentManager.beginTransaction()
                 .replace(binding.fragmentContainer.id, HotelFragment()).commit()
-            R.id.luoghi -> supportFragmentManager.beginTransaction()
-                .replace(binding.fragmentContainer.id, LuoghiFragment()).commit()
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
