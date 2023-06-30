@@ -1,12 +1,11 @@
 package com.matteopaterno.progettopwm.ristoranti
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentRistorantiBinding
 import kotlin.random.Random
@@ -24,7 +23,8 @@ class RistorantiFragment : Fragment() {
     ): View? {
         binding = FragmentRistorantiBinding.inflate(layoutInflater)
         super.onCreateView(inflater, container, savedInstanceState)
-        binding.recyclerviewRistoranti.layoutManager = LinearLayoutManager(context)
+        binding.ristorantiRecyclerView.layoutManager = LinearLayoutManager(context)
+
         val data = ArrayList<RistorantiData>()
         for (i in 1..20){
             data.add(
@@ -33,6 +33,9 @@ class RistorantiFragment : Fragment() {
             "Via roma "+ i,
             Random.nextFloat()* (5-0)))
         }
+
+        val adapter = RistorantiAdapter(data)
+        binding.ristorantiRecyclerView.adapter = adapter
         return binding.root
     }
 

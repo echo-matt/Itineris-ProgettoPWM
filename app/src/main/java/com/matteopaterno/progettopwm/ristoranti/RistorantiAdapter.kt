@@ -1,13 +1,9 @@
 package com.matteopaterno.progettopwm.ristoranti
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle.Delegate
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.imageview.ShapeableImageView
-import com.matteopaterno.progettopwm.R
-import com.matteopaterno.progettopwm.databinding.FragmentHotelBinding
 import com.matteopaterno.progettopwm.databinding.RistorantiCardViewBinding
 
 class RistorantiAdapter(private val ristorantiDataList: ArrayList<RistorantiData>) : RecyclerView.Adapter<RistorantiAdapter.ViewHolder>() {

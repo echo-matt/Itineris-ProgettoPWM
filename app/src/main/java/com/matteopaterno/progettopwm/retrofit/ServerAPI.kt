@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST;
 import retrofit2.http.Url
 
-public interface UserAPI {
+public interface ServerAPI {
     @POST("postSelect/")
     @FormUrlEncoded
     fun select(@Field("query") query: String): Call <JsonObject>

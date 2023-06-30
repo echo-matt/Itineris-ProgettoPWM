@@ -26,7 +26,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawerLayout = binding.drawerLayout
 
-
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 

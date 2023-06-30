@@ -9,6 +9,6 @@ object ClientNetwork {
             .baseUrl("http://10.0.2.2:8000/webmobile/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(UserAPI::class.java)
+            .create(ServerAPI::class.java)
     }
 }
