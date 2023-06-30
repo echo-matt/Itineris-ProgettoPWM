@@ -7,28 +7,32 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import com.matteopaterno.progettopwm.R
+import com.matteopaterno.progettopwm.databinding.FragmentHotelBinding
+import com.matteopaterno.progettopwm.databinding.RistorantiCardViewBinding
 
-class RistorantiAdapter(private val ristorantiDataList: ArrayList<RistorantiData>) : RecyclerView.Adapter<RistorantiAdapter.MyViewHolder>() {
+class RistorantiAdapter(private val ristorantiDataList: ArrayList<RistorantiData>) : RecyclerView.Adapter<RistorantiAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.lista_ristoranti, parent, false)
-        return MyViewHolder(itemView)
+    class ViewHolder(binding: RistorantiCardViewBinding) : RecyclerView.ViewHolder(binding.root){
+        val imageView = binding.imageView
+        val nome = binding.textNome
+        val ratingBar = binding.ratingBar
+        val posizione = binding.textPosizione
+    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = RistorantiCardViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return ristorantiDataList.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = ristorantiDataList[position]
-        holder.titleImage.setImageResource(currentItem.image)
-        holder.tvHeading.text = currentItem.text
-    }
-
-    class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-
-        val titleImage : ShapeableImageView = itemView.findViewById(R.id.title_image)
-        val tvHeading : TextView = itemView.findViewById(R.id.tvHeading)
+        holder.imageView.setImageResource(currentItem.image)
+        holder.nome.text = currentItem.nome
+        holder.ratingBar.rating = currentItem.rating
+        holder.posizione.text = currentItem.posizione
 
     }
 

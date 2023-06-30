@@ -27,7 +27,7 @@ class HotelFragment : Fragment() {
         binding.hotelRecyclerView.layoutManager = LinearLayoutManager(context)
         val data = ArrayList<HotelData>()
         for (i in 1..20){
-            data.add(HotelData(R.drawable.photo_1506905925346_21bda4d32df4, "Hotel X", 4.0, "Via Roma 1"))
+            data.add(HotelData(R.drawable.photo_1506905925346_21bda4d32df4, "Hotel X", 4.0f, "Via Roma 1"))
         }
 
         val adapter = HotelAdapter(data)
