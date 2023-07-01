@@ -1,6 +1,7 @@
 package com.matteopaterno.progettopwm.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.matteopaterno.progettopwm.MainActivity
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.ActivityProfileBinding
 import com.matteopaterno.progettopwm.hotel.HotelFragment
@@ -56,9 +58,24 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .replace(binding.fragmentContainer.id, HomeFragment()).commit()
             R.id.hotel -> supportFragmentManager.beginTransaction()
                 .replace(binding.fragmentContainer.id, HotelFragment()).commit()
+            R.id.exit -> logoutUser()
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun logoutUser() {
+        val loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE)
+        val loginPrefsEditor = loginPreferences.edit()
+
+        loginPrefsEditor.clear()
+        loginPrefsEditor.putBoolean("saveLogin", false)
+        loginPrefsEditor.putBoolean("isLoggedIn", false)
+        loginPrefsEditor.apply()
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     override fun onBackPressed() {

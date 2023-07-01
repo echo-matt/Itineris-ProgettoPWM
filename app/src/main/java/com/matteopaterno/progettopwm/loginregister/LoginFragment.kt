@@ -1,6 +1,8 @@
 package com.matteopaterno.progettopwm.loginregister
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +17,14 @@ import com.matteopaterno.progettopwm.retrofit.ClientNetwork
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.log
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding : FragmentLoginBinding
+    private lateinit var loginPreferences : SharedPreferences
+    private lateinit var loginPrefsEditor : SharedPreferences.Editor
+    private var saveLogin = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +32,17 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(layoutInflater)
+
+        loginPreferences = requireActivity().getSharedPreferences("loginPrefs", MODE_PRIVATE)
+        loginPrefsEditor = loginPreferences.edit()
+
+        saveLogin = loginPreferences.getBoolean("saveLogin", false)
+        if (saveLogin){
+            binding.username.setText(loginPreferences.getString("username", ""))
+            binding.password.setText(loginPreferences.getString("password", ""))
+            binding.rememberMeCheckbox.isChecked = true
+        }
+
         binding.loginButton.setOnClickListener {
 
             val username = binding.username.text.toString()
@@ -42,7 +59,9 @@ class LoginFragment : Fragment() {
                 binding.password.requestFocus()
                 return@setOnClickListener
             }
-        loginUtente(username, password)
+
+            loginUtente(username, password)
+
         }
         return binding.root
     }
@@ -57,6 +76,20 @@ class LoginFragment : Fragment() {
                     if(response.isSuccessful){
                         if ((response.body()?.get("queryset") as JsonArray).size() == 1){
                             Toast.makeText(activity, "Select successful", Toast.LENGTH_SHORT).show()
+
+                            if (binding.rememberMeCheckbox.isChecked){
+                                loginPrefsEditor.putString("username", username)
+                                loginPrefsEditor.putString("password", password)
+                                loginPrefsEditor.putBoolean("saveLogin", true)
+                                loginPrefsEditor.putBoolean("isLoggedIn", true)
+                                loginPrefsEditor.apply()
+                            }else{
+                                loginPrefsEditor.clear()
+                                loginPrefsEditor.putBoolean("saveLogin", false)
+                                loginPrefsEditor.putBoolean("isLoggedIn", true)
+                                loginPrefsEditor.apply()
+                            }
+
                             val intent = Intent(context, HomeActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)

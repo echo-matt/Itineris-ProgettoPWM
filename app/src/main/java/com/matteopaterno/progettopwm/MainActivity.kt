@@ -1,22 +1,34 @@
 package com.matteopaterno.progettopwm
 
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.matteopaterno.progettopwm.databinding.ActivityMainBinding
+import com.matteopaterno.progettopwm.home.HomeActivity
 import com.matteopaterno.progettopwm.loginregister.LoginFragment
 import com.matteopaterno.progettopwm.loginregister.RegisterFragment
 
 
 class MainActivity : AppCompatActivity() {
 
-
-
     private lateinit var binding : ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        val loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE)
+        val isLoggedIn = loginPreferences.getBoolean("isLoggedIn", false)
+        if (isLoggedIn){
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            return
+        }
+
         val loginFragment = LoginFragment()
         val registerFragment = RegisterFragment()
 
