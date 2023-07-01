@@ -10,7 +10,7 @@ import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentRistorantiBinding
 import kotlin.random.Random
 
-class RistorantiFragment : Fragment() {
+class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
     private lateinit var binding: FragmentRistorantiBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,12 +29,14 @@ class RistorantiFragment : Fragment() {
         for (i in 1..20){
             data.add(
                 RistorantiData(R.drawable.photo_1506905925346_21bda4d32df4,
-                "Ristorante "+i,
-            "Via roma "+ i,
-            Random.nextFloat()* (5-0)))
+                    "Ristorante $i",
+                    "Via roma $i",
+                    Random.nextFloat() * (5 - 0))
+            )
         }
 
         val adapter = RistorantiAdapter(data)
+        adapter.setOnItemClickListener(this)
         binding.ristorantiRecyclerView.adapter = adapter
         return binding.root
     }
@@ -43,5 +45,11 @@ class RistorantiFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-
+    override fun onItemClick(ristorente: RistorantiData) {
+        val fragment = DettagliRistorantiFragment.newInstance(ristorente)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
 }
