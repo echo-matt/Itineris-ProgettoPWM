@@ -1,5 +1,6 @@
 package com.matteopaterno.progettopwm.ristoranti
 
+import RistorantiData
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,7 @@ class RistorantiAdapter(private val ristorantiDataList: ArrayList<RistorantiData
     interface OnItemClickListener {
         fun onItemClick(ristorante: RistorantiData)
     }
+
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         onItemClickListener = listener

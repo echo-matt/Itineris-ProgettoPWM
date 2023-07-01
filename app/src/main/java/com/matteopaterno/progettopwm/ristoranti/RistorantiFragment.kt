@@ -1,5 +1,6 @@
 package com.matteopaterno.progettopwm.ristoranti
 
+import RistorantiData
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
