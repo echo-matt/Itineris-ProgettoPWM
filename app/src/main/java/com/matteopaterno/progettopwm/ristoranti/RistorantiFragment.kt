@@ -48,6 +48,20 @@ class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
 
     override fun onItemClick(ristorente: RistorantiData) {
         val fragment = DettagliRistorantiFragment.newInstance(ristorente)
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+
+        transaction.setCustomAnimations(
+            R.anim.slide_in_right, // Animazione di transizione in entrata per DettagliRistorantiFragment
+            R.anim.slide_out_left, // Animazione di transizione in uscita per RistorantiFragment
+            R.anim.slide_in_left, // Animazione di transizione in entrata per RistorantiFragment
+            R.anim.slide_out_right // Animazione di transizione in uscita per DettagliRistorantiFragment
+        )
+
+
+        transaction.replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
