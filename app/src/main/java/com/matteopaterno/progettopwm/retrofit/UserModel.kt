@@ -1,5 +1,6 @@
 package com.matteopaterno.progettopwm.retrofit
 
+import android.graphics.Bitmap
 import com.google.gson.annotations.SerializedName
 
 data class UserModel(
@@ -15,6 +16,9 @@ data class UserModel(
 
     @SerializedName("password")
     var userPassword: String?,
+
+    @SerializedName("img")
+    var img: Bitmap
 )
 
 data class UserLoginModel(

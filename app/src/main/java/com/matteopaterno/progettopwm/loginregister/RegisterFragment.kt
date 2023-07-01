@@ -32,7 +32,6 @@ class RegisterFragment : Fragment() {
             val cognome = binding.cognome.text.toString()
             val username = binding.username.text.toString()
             val password = binding.password.text.toString()
-            val userDataObj = UserModel(nome, cognome, username, password)
 
             if (nome.isEmpty()){
                 binding.nome.error = "Nome richiesto"

@@ -3,7 +3,10 @@ package com.matteopaterno.progettopwm.loginregister
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +14,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.matteopaterno.progettopwm.home.HomeActivity
 import com.matteopaterno.progettopwm.databinding.FragmentLoginBinding
+import com.matteopaterno.progettopwm.home.HomeActivity
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
+import java.io.ByteArrayOutputStream
 
 class LoginFragment : Fragment() {
 
@@ -74,9 +78,12 @@ class LoginFragment : Fragment() {
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if(response.isSuccessful){
+
                         if ((response.body()?.get("queryset") as JsonArray).size() == 1){
                             Toast.makeText(activity, "Select successful", Toast.LENGTH_SHORT).show()
 
+
+                            //Se la checkbox e' selezionata, salva nelle shared preferences username, password, il voler essere ricordati, e lo stato di login
                             if (binding.rememberMeCheckbox.isChecked){
                                 loginPrefsEditor.putString("username", username)
                                 loginPrefsEditor.putString("password", password)

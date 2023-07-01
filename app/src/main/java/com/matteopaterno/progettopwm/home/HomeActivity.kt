@@ -13,6 +13,7 @@ import com.matteopaterno.progettopwm.MainActivity
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.ActivityProfileBinding
 import com.matteopaterno.progettopwm.hotel.HotelFragment
+import com.matteopaterno.progettopwm.profile.ProfileFragment
 import com.matteopaterno.progettopwm.ristoranti.RistorantiFragment
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -59,6 +60,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.hotel -> supportFragmentManager.beginTransaction()
                 .replace(binding.fragmentContainer.id, HotelFragment()).commit()
             R.id.exit -> logoutUser()
+            R.id.share -> supportFragmentManager.beginTransaction()
+                .replace(binding.fragmentContainer.id, ProfileFragment()).commit()
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
