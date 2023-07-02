@@ -23,5 +23,7 @@
     <string name="head_4">Ristorante d</string>
     <string name="head_5">Ristorante e</string>
     <string name="head_6">Ristorante f</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>

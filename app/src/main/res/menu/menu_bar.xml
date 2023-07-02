@@ -21,9 +21,14 @@
             android:title="Hotel"/>
 
         <item
-            android:id="@+id/luoghi"
-            android:icon="@drawable/baseline_holiday_village_24"
-            android:title="Luoghi"/>
+            android:id="@+id/attrazzioni"
+            android:icon="@drawable/baseline_beach_access_24"
+            android:title="Attrazioni"/>
+
+        <item
+            android:id="@+id/meteo"
+            android:icon="@drawable/baseline_wb_sunny_24"
+            android:title="Meteo"/>
 
 
 

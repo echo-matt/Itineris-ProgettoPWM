@@ -11,8 +11,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.matteopaterno.progettopwm.MainActivity
 import com.matteopaterno.progettopwm.R
+import com.matteopaterno.progettopwm.attrazioni.AttrazioniFragment
 import com.matteopaterno.progettopwm.databinding.ActivityProfileBinding
+import com.matteopaterno.progettopwm.databinding.FragmentAttrazioniBinding
 import com.matteopaterno.progettopwm.hotel.HotelFragment
+import com.matteopaterno.progettopwm.meteo.MeteoFragment
 import com.matteopaterno.progettopwm.profile.ProfileFragment
 import com.matteopaterno.progettopwm.ristoranti.RistorantiFragment
 
@@ -59,6 +62,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .replace(binding.fragmentContainer.id, HomeFragment()).commit()
             R.id.hotel -> supportFragmentManager.beginTransaction()
                 .replace(binding.fragmentContainer.id, HotelFragment()).commit()
+            R.id.attrazzioni -> supportFragmentManager.beginTransaction()
+                .replace(binding.fragmentContainer.id, AttrazioniFragment()).commit()
+            R.id.meteo -> supportFragmentManager.beginTransaction()
+                .replace(binding.fragmentContainer.id, MeteoFragment()).commit()
             R.id.exit -> logoutUser()
             R.id.share -> supportFragmentManager.beginTransaction()
                 .replace(binding.fragmentContainer.id, ProfileFragment()).commit()

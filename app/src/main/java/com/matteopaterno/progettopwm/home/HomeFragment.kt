@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.matteopaterno.progettopwm.databinding.FragmentAttrazioniBinding
 import com.matteopaterno.progettopwm.databinding.FragmentHomeBinding
 import com.matteopaterno.progettopwm.hotel.HotelAdapter
 import com.matteopaterno.progettopwm.ristoranti.RistorantiAdapter
@@ -33,5 +34,7 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
+
+
 
 }
