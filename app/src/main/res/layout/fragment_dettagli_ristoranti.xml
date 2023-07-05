@@ -8,67 +8,193 @@
     android:orientation="vertical"
     tools:context=".ristoranti.DettagliRistorantiFragment">
 
-    <androidx.cardview.widget.CardView
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button12">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageRist"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/pizzeria" />
-
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/imageRist"
-                app:layout_constraintEnd_toEndOf="@+id/textNome"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textNome" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageRist"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/pizzeria"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:scaleX=".5"
+                        android:scaleY=".5"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:isIndicator="true"
+                        android:progressBackgroundTint="#33FFFF00"
+                        android:progressTint="#FFFF00"
+                        android:rating="3"
+                        android:secondaryProgressTint="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageRist"
+                        app:layout_constraintTop_toBottomOf="@id/textPosizione"
+                        app:layout_constraintEnd_toEndOf="@+id/textNome"
+                        app:layout_constraintVertical_bias="0.05"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/textNome" />
+
+                    <TextView
+                        android:id="@+id/textPosizione"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/imageLoc"
+                        app:layout_constraintTop_toBottomOf="@+id/textNome"
+                        tools:text="Via Roma 1, Città" />
+
+                    <TextView
+                        android:id="@+id/textNome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/imageRist"
+                        app:layout_constraintVertical_bias="0.1"
+                        tools:text="Nome Ristorante" />
+
+                    <ImageView
+                        android:id="@+id/imageLoc"
+                        android:layout_width="24dp"
+                        android:layout_height="21dp"
+                        android:src="@drawable/tag"
+                        app:layout_constraintBottom_toBottomOf="@id/textPosizione"
+                        app:layout_constraintEnd_toStartOf="@id/textPosizione"
+                        app:layout_constraintStart_toStartOf="@+id/textNome"
+                        app:layout_constraintTop_toBottomOf="@+id/textNome" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="Button"
+                android:elevation="5dp"
+                android:layout_marginRight="2dp"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/button10"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardView" />
+
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                android:layout_marginRight="2dp"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/button7"
+                app:layout_constraintEnd_toStartOf="@+id/button11"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button7"
+                app:layout_constraintTop_toTopOf="@+id/button7" />
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                android:layout_marginRight="2dp"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/button10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button10"
+                app:layout_constraintTop_toTopOf="@+id/button10" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button10"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:id="@+id/textPosizione"
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/imageLoc"
-                app:layout_constraintTop_toBottomOf="@+id/textNome"
-                tools:text="Via Roma 1, Città" />
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod maximus neque, eget elementum lacus lobortis aliquet. Sed consectetur blandit rhoncus. Vivamus gravida fringilla dui, a tempus nulla efficitur eu. Quisque id dictum augue. Suspendisse dignissim feugiat condimentum. Sed dictum orci at tincidunt tincidunt. Suspendisse ut nisl placerat, consequat tortor eu, sagittis odio. Fusce risus lorem, laoreet sed ultricies quis, tempor eu mi. Sed posuere, est in scelerisque rutrum, tellus dui luctus nunc, eu eleifend libero metus ac neque. Nam feugiat convallis lorem ut porta. Pellentesque quis nisl pretium, pretium nisl in, lacinia nunc. Praesent lacinia nibh sed diam luctus, volutpat porta nibh consectetur. Nam ac libero mauris. Nam tincidunt, tellus a cursus semper, purus elit ornare ligula, in mollis massa sapien at diam.
 
-            <TextView
-                android:id="@+id/textNome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="30dp"
-                android:textStyle="bold"
+Fusce elementum neque eget erat fermentum sodales. Aenean luctus ex ac enim commodo, ut tincidunt dui euismod. Aliquam quis elit odio. Duis ornare, justo a placerat tempor, tellus turpis pulvinar est, sed varius purus mauris in tortor. Cras malesuada at nulla sit amet dignissim. Ut ut malesuada felis. Sed sagittis nibh sit amet ante aliquam gravida. Proin ullamcorper ex vel ultrices porttitor. Pellentesque posuere consectetur enim vitae mattis. Mauris sed dictum erat, nec maximus risus. Quisque porttitor ex sed dui ultricies eleifend ac nec leo. Nam cursus, justo eget blandit pretium, erat elit posuere mauris, tempor efficitur enim nunc sit amet mauris. Integer quis nisl augue. Donec venenatis arcu quis magna ultrices dignissim.
+
+Nullam enim diam, pellentesque at vulputate ac, tristique vitae risus. Aliquam dapibus maximus dui at feugiat. Donec eu quam sit amet metus laoreet ultricies. Morbi molestie ut magna porta aliquet. Mauris eu nibh in ex tempus fringilla. Suspendisse dapibus dignissim cursus. Etiam pellentesque, elit quis maximus ornare, turpis enim suscipit magna, eu ultricies leo sapien a neque. Aliquam semper nec nulla ut blandit. Donec commodo magna eu quam accumsan consequat. Vestibulum sodales ligula nunc, vitae eleifend velit volutpat id. Phasellus sed mauris vitae nisi faucibus venenatis in tempus augue. Fusce tortor ex, porttitor ac porta sit amet, viverra eu nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+
+Fusce a eros porttitor, tempor velit eget, accumsan neque. Phasellus ac luctus lacus. Pellentesque pharetra eros nec tristique rutrum. Nulla vel vestibulum sapien. Maecenas placerat scelerisque lacus, in maximus arcu molestie vitae. Nullam vitae lectus nec erat faucibus vestibulum. Maecenas placerat ligula quis turpis posuere dictum. Ut blandit lacus sed neque molestie, et mollis diam lacinia.
+
+Nullam tristique fermentum odio, at rhoncus arcu malesuada sit amet. Cras est metus, pulvinar a euismod nec, maximus convallis ipsum. Sed varius pharetra molestie. In vitae venenatis eros, non vehicula nisi. Vivamus eget varius justo, in sodales magna. Integer dapibus, nunc eu fringilla mollis, sapien orci lobortis lectus, sed finibus libero sapien quis ex. Quisque eu iaculis magna. Integer nec dolor eros. Donec est nulla, aliquet a lectus non, consectetur lacinia ex. Fusce a neque eget enim congue dictum et sed augue. Nunc ut dapibus arcu. Donec turpis metus, scelerisque at nulla id, tincidunt rutrum lectus. Pellentesque porttitor vehicula nisi, ut pretium odio pretium vel."
+                android:textColor="@color/blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.142"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageRist"
-                app:layout_constraintVertical_bias="0.151"
-                tools:text="Nome Ristorante" />
-
-            <ImageView
-                android:id="@+id/imageLoc"
-                android:layout_width="24dp"
-                android:layout_height="21dp"
-                android:src="@drawable/tag"
-                app:layout_constraintStart_toStartOf="@+id/textNome"
-                app:layout_constraintTop_toBottomOf="@+id/textNome" />
+                app:layout_constraintTop_toBottomOf="@+id/button10" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+
+    </ScrollView>
+
+
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <!-- Aggiungi altri componenti UI per visualizzare ulteriori dettagli del ristorante -->
 

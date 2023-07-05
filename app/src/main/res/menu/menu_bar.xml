@@ -21,7 +21,7 @@
             android:title="Hotel"/>
 
         <item
-            android:id="@+id/attrazzioni"
+            android:id="@+id/attrazioni"
             android:icon="@drawable/baseline_beach_access_24"
             android:title="Attrazioni"/>
 

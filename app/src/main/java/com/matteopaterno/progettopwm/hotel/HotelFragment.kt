@@ -34,6 +34,7 @@ class HotelFragment : Fragment() {
         binding.hotelRecyclerView.layoutManager = LinearLayoutManager(context)
 
 
+        /*
         val cityEditText = binding.cityEditText
         cityEditText.setOnEditorActionListener{_, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE){
@@ -43,6 +44,7 @@ class HotelFragment : Fragment() {
                 false
             }
         }
+         */
 
         val data = ArrayList<HotelData>()
         val query = "select * from hotels;"
@@ -80,6 +82,7 @@ class HotelFragment : Fragment() {
         return binding.root
     }
 
+    /*
     private fun applyFilters() {
         val city = binding.cityEditText.text.toString().trim()
         val filteredData = ArrayList<HotelData>()
@@ -92,4 +95,6 @@ class HotelFragment : Fragment() {
         val adapter = HotelAdapter(filteredData)
         binding.hotelRecyclerView.adapter = adapter
     }
+
+     */
 }

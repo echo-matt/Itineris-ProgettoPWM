@@ -15,34 +15,4 @@ data class RistorantiData(
 
     @SerializedName("rating")
     var rating: Float
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readInt(),
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readFloat()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(image)
-        parcel.writeInt(image2)
-        parcel.writeString(nome)
-        parcel.writeString(posizione)
-        parcel.writeFloat(rating)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<RistorantiData> {
-        override fun createFromParcel(parcel: Parcel): RistorantiData {
-            return RistorantiData(parcel)
-        }
-
-        override fun newArray(size: Int): Array<RistorantiData?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+)
