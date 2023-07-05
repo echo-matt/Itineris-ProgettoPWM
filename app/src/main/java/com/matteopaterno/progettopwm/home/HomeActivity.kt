@@ -67,7 +67,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.meteo -> supportFragmentManager.beginTransaction()
                 .replace(binding.fragmentContainer.id, MeteoFragment()).commit()
             R.id.exit -> logoutUser()
-            R.id.share -> supportFragmentManager.beginTransaction()
+            R.id.profilo -> supportFragmentManager.beginTransaction()
                 .replace(binding.fragmentContainer.id, ProfileFragment()).commit()
         }
         drawerLayout.closeDrawer(GravityCompat.START)

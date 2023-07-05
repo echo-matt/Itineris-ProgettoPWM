@@ -29,7 +29,7 @@ class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
         val data = ArrayList<RistorantiData>()
         for (i in 1..20){
             data.add(
-                RistorantiData(R.drawable.photo_1506905925346_21bda4d32df4,
+                RistorantiData(R.drawable.photo_1506905925346_21bda4d32df4, R.drawable.tag,
                     "Ristorante $i",
                     "Via roma $i",
                     Random.nextFloat() * (5 - 0))

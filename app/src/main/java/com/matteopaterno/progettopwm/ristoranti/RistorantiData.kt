@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName
 data class RistorantiData(
     var image: Int,
 
+    var image2: Int,
+
     @SerializedName("nome")
     var nome: String,
 
@@ -16,6 +18,7 @@ data class RistorantiData(
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
+        parcel.readInt(),
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readFloat()
@@ -23,6 +26,7 @@ data class RistorantiData(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(image)
+        parcel.writeInt(image2)
         parcel.writeString(nome)
         parcel.writeString(posizione)
         parcel.writeFloat(rating)
