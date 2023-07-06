@@ -23,17 +23,19 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-
         val navView: BottomNavigationView = binding.bottomNav
         navView.setOnItemSelectedListener(onNavigationItemSelectedListener)
-
+        supportFragmentManager.beginTransaction().replace(binding.fragmentContainer.id, HomeFragment()).commit()
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(binding.fragmentContainer.id, HomeFragment()).commit()
             navView.selectedItemId = R.id.home
         }
+        var hotel = HotelFragment()
+        var ristoranti = RistorantiFragment()
+        hotel.createHotelList()
+        ristoranti.createRistorantiList()
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

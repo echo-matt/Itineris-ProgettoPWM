@@ -3,6 +3,7 @@ package com.matteopaterno.progettopwm.hotel
 import com.google.gson.annotations.SerializedName
 
 data class HotelData(
+
     @SerializedName("id")
     var id: Int?,
 

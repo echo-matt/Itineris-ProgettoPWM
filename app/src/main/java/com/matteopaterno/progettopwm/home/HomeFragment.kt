@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.matteopaterno.progettopwm.databinding.FragmentAttrazioniBinding
 import com.matteopaterno.progettopwm.databinding.FragmentHomeBinding
+import com.matteopaterno.progettopwm.hotel.HotelDataListHolder
 import com.matteopaterno.progettopwm.hotel.HotelAdapter
 import com.matteopaterno.progettopwm.ristoranti.RistorantiAdapter
-import com.matteopaterno.progettopwm.ristoranti.RistorantiFragment
+import com.matteopaterno.progettopwm.ristoranti.RistorantiDataListHolder
 
 class HomeFragment : Fragment() {
+
+    private lateinit var hotelAdapter: HotelAdapter
+    private lateinit var ristorantiAdapter: RistorantiAdapter
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,10 +29,13 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         super.onCreateView(inflater, container, savedInstanceState)
+        val hotelAdapter = HotelAdapter(HotelDataListHolder.hotelDataList)
         binding.hotelRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.hotelRecyclerView.adapter
+        binding.hotelRecyclerView.adapter = hotelAdapter
+
+        val ristorantiAdapter = RistorantiAdapter(RistorantiDataListHolder.RistorantiDataList)
         binding.ristorantiRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.ristorantiRecyclerView.adapter
+        binding.ristorantiRecyclerView.adapter = ristorantiAdapter
         // TODO IMPLEMENTARE STESSA RECYCLE VIEW DEI 2 FRAGMENT
 
         return binding.root

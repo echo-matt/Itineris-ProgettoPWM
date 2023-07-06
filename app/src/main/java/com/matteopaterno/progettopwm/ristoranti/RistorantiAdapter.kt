@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.matteopaterno.progettopwm.databinding.RistorantiCardViewBinding
 
-class RistorantiAdapter(private val ristorantiDataList: ArrayList<RistorantiData>) : RecyclerView.Adapter<RistorantiAdapter.ViewHolder>() {
+class RistorantiAdapter(private val ristorantiDataList: List<RistorantiData>) : RecyclerView.Adapter<RistorantiAdapter.ViewHolder>() {
 
     private var onItemClickListener: OnItemClickListener? = null
 

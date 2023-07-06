@@ -26,20 +26,28 @@ class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
         super.onCreateView(inflater, container, savedInstanceState)
         binding.ristorantiRecyclerView.layoutManager = LinearLayoutManager(context)
 
+        binding.ristorantiRecyclerView.adapter = createRistorantiList()
+        return binding.root
+    }
+
+    fun createRistorantiList(): RistorantiAdapter {
         val data = ArrayList<RistorantiData>()
-        for (i in 1..20){
+        for (i in 1..20) {
             data.add(
-                RistorantiData(R.drawable.photo_1506905925346_21bda4d32df4, R.drawable.tag,
+                RistorantiData(
+                    R.drawable.photo_1506905925346_21bda4d32df4, R.drawable.tag,
                     "Ristorante $i",
                     "Via roma $i",
-                    Random.nextFloat() * (5 - 0))
+                    Random.nextFloat() * (5 - 0)
+                )
             )
         }
+        RistorantiDataListHolder.RistorantiDataList.addAll(data)
 
         val adapter = RistorantiAdapter(data)
         adapter.setOnItemClickListener(this)
-        binding.ristorantiRecyclerView.adapter = adapter
-        return binding.root
+        return adapter
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
