@@ -65,7 +65,7 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(layoutInflater)
         loginPreferences = requireActivity().getSharedPreferences("loginPrefs", MODE_PRIVATE)
 
-        binding.nomeTextView.text = loginPreferences.getString("img", "")
+        binding.nomeTextView.text = loginPreferences.getString("nome", "")
 
         binding.settingsButton.setOnClickListener {
             loginPreferences.edit().remove("img").apply()

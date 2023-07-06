@@ -55,6 +55,7 @@ class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(ristorente: RistorantiData) {
+        binding = FragmentRistorantiBinding.inflate(layoutInflater)
         val fragment = DettagliRistorantiFragment.newInstance(ristorente)
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
 
@@ -66,9 +67,7 @@ class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
         )
 
 
-        transaction.replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
+
 
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)

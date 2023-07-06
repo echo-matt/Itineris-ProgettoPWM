@@ -9,6 +9,9 @@ import com.matteopaterno.progettopwm.MainActivity
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.attrazioni.AttrazioniFragment
 import com.matteopaterno.progettopwm.databinding.ActivityHomeBinding
+import com.matteopaterno.progettopwm.hotel.HotelAdapter
+import com.matteopaterno.progettopwm.hotel.HotelData
+import com.matteopaterno.progettopwm.hotel.HotelDataCallback
 import com.matteopaterno.progettopwm.hotel.HotelFragment
 import com.matteopaterno.progettopwm.meteo.MeteoFragment
 import com.matteopaterno.progettopwm.profile.ProfileFragment
@@ -34,21 +37,25 @@ class HomeActivity : AppCompatActivity() {
         }
         var hotel = HotelFragment()
         var ristoranti = RistorantiFragment()
-        hotel.createHotelList()
+       // hotel.createHotelList
         ristoranti.createRistorantiList()
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId){
             R.id.ristoranti ->{
-                supportFragmentManager.beginTransaction()
-                    .replace(binding.fragmentContainer.id, RistorantiFragment()).commit()
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.setReorderingAllowed(true)
+                transaction.replace(binding.fragmentContainer.id, RistorantiFragment()).commit()
                 return@OnNavigationItemSelectedListener true
             }
 
             R.id.meteo ->{
-                supportFragmentManager.beginTransaction()
-                    .replace(binding.fragmentContainer.id, MeteoFragment()).commit()
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.setReorderingAllowed(true)
+                transaction.replace(binding.fragmentContainer.id, MeteoFragment()).commit()
+
+
                 return@OnNavigationItemSelectedListener true
             }
 
