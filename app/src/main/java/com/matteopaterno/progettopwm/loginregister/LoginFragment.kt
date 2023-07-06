@@ -17,6 +17,7 @@ import com.google.gson.JsonObject
 import com.matteopaterno.progettopwm.databinding.FragmentLoginBinding
 import com.matteopaterno.progettopwm.home.HomeActivity
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
+import com.squareup.moshi.Json
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -88,15 +89,16 @@ class LoginFragment : Fragment() {
                             val nome = jsonObject?.get("nome")?.asString
                             val cognome = jsonObject?.get("cognome")?.asString
                             val id = jsonObject?.get("id")?.asString
+                            val img = jsonObject?.get("img")?.asString
 
                             //Se la checkbox e' selezionata, salva nelle shared preferences username, password, il voler essere ricordati, e lo stato di login
                             if (binding.rememberMeCheckbox.isChecked){
-                                saveLoginInfo(username, password, nome, cognome, id)
+                                saveLoginInfo(username, password, nome, cognome, id, img)
                                 loginPrefsEditor.putBoolean("saveLogin", true)
                                 loginPrefsEditor.putBoolean("isLoggedIn", true)
-                                loginPrefsEditor.apply()
+                                loginPrefsEditor.commit()
                             }else{
-                                saveLoginInfo(username, password, nome, cognome, id)
+                                saveLoginInfo(username, password, nome, cognome, id, img)
                                 loginPrefsEditor.remove("saveLogin")
                                 loginPrefsEditor.putBoolean("saveLogin", false)
                                 loginPrefsEditor.putBoolean("isLoggedIn", true)
@@ -117,29 +119,6 @@ class LoginFragment : Fragment() {
                 }
             }
         )
-
-        val query2 = "select img from users where username = '${loginPreferences.getString("username","matteop")}';"
-        ClientNetwork.retrofit.select(query2).enqueue(
-            object : Callback<JsonObject> {
-                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                    if (response.isSuccessful) {
-                        val jsonResponse = response.body()
-                        val queryset = jsonResponse?.getAsJsonArray("queryset")
-
-                        if (queryset != null) {
-                            val jsonObject = queryset[0].asJsonObject
-                            val url = jsonObject?.get("img")?.asString
-                            loginPreferences.edit().putString("img", url).apply()
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    t.printStackTrace()
-                    Toast.makeText(activity, "Richiesta fallita", Toast.LENGTH_SHORT).show()
-                }
-            }
-        )
     }
 
     private fun saveLoginInfo(
@@ -147,12 +126,15 @@ class LoginFragment : Fragment() {
         password: String,
         nome: String?,
         cognome: String?,
-        id: String?
+        id: String?,
+        img: String?
     ) {
         loginPrefsEditor.putString("username", username)
         loginPrefsEditor.putString("password", password)
         loginPrefsEditor.putString("nome", nome)
         loginPrefsEditor.putString("cognome", cognome)
         loginPrefsEditor.putString("id", id)
+        loginPrefsEditor.putString("img", img)
+        loginPrefsEditor.commit()
     }
 }

@@ -25,8 +25,6 @@ class ProfileFragment : Fragment() {
     private lateinit var binding : FragmentProfileBinding
     private lateinit var loginPreferences : SharedPreferences
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loginPreferences = requireActivity().getSharedPreferences("loginPrefs", MODE_PRIVATE)
@@ -67,13 +65,13 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(layoutInflater)
         loginPreferences = requireActivity().getSharedPreferences("loginPrefs", MODE_PRIVATE)
 
-        binding.nomeTextView.text = loginPreferences.getString("nome", "")
+        binding.nomeTextView.text = loginPreferences.getString("img", "")
 
         binding.settingsButton.setOnClickListener {
             loginPreferences.edit().remove("img").apply()
         }
         binding.prenotazioniButton.setOnClickListener {
-            Toast.makeText(activity, loginPreferences.getString("nome",""), Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, loginPreferences.getString("img",""), Toast.LENGTH_SHORT).show()
         }
 
         binding.logoutButton.setOnClickListener {
