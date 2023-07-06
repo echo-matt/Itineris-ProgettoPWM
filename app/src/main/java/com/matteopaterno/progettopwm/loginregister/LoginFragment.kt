@@ -72,9 +72,9 @@ class LoginFragment : Fragment() {
 
     private fun loginUtente(username: String, password: String){
 
-        val query = "select * from users where username = '${username}' and password = '${password}';"
+        val query1 = "select * from users where username = '${username}' and password = '${password}';"
 
-        ClientNetwork.retrofit.select(query).enqueue(
+        ClientNetwork.retrofit.select(query1).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if(response.isSuccessful){
@@ -82,16 +82,22 @@ class LoginFragment : Fragment() {
                         if ((response.body()?.get("queryset") as JsonArray).size() == 1){
                             Toast.makeText(activity, "Select successful", Toast.LENGTH_SHORT).show()
 
+                            val jsonResponse = response.body()
+                            val queryset = jsonResponse?.getAsJsonArray("queryset")
+                            val jsonObject = queryset!![0].asJsonObject
+                            val nome = jsonObject?.get("nome")?.asString
+                            val cognome = jsonObject?.get("cognome")?.asString
+                            val id = jsonObject?.get("id")?.asString
 
                             //Se la checkbox e' selezionata, salva nelle shared preferences username, password, il voler essere ricordati, e lo stato di login
                             if (binding.rememberMeCheckbox.isChecked){
-                                loginPrefsEditor.putString("username", username)
-                                loginPrefsEditor.putString("password", password)
+                                saveLoginInfo(username, password, nome, cognome, id)
                                 loginPrefsEditor.putBoolean("saveLogin", true)
                                 loginPrefsEditor.putBoolean("isLoggedIn", true)
                                 loginPrefsEditor.apply()
                             }else{
-                                loginPrefsEditor.clear()
+                                saveLoginInfo(username, password, nome, cognome, id)
+                                loginPrefsEditor.remove("saveLogin")
                                 loginPrefsEditor.putBoolean("saveLogin", false)
                                 loginPrefsEditor.putBoolean("isLoggedIn", true)
                                 loginPrefsEditor.apply()
@@ -111,5 +117,42 @@ class LoginFragment : Fragment() {
                 }
             }
         )
+
+        val query2 = "select img from users where username = '${loginPreferences.getString("username","matteop")}';"
+        ClientNetwork.retrofit.select(query2).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        val jsonResponse = response.body()
+                        val queryset = jsonResponse?.getAsJsonArray("queryset")
+
+                        if (queryset != null) {
+                            val jsonObject = queryset[0].asJsonObject
+                            val url = jsonObject?.get("img")?.asString
+                            loginPreferences.edit().putString("img", url).apply()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    t.printStackTrace()
+                    Toast.makeText(activity, "Richiesta fallita", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
+
+    private fun saveLoginInfo(
+        username: String,
+        password: String,
+        nome: String?,
+        cognome: String?,
+        id: String?
+    ) {
+        loginPrefsEditor.putString("username", username)
+        loginPrefsEditor.putString("password", password)
+        loginPrefsEditor.putString("nome", nome)
+        loginPrefsEditor.putString("cognome", cognome)
+        loginPrefsEditor.putString("id", id)
     }
 }

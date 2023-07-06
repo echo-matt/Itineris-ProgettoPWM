@@ -18,7 +18,7 @@ data class UserModel(
     var userPassword: String?,
 
     @SerializedName("img")
-    var img: Bitmap
+    var img: String?
 )
 
 data class UserLoginModel(

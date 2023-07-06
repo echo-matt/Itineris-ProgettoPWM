@@ -23,6 +23,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
+
         val navView: BottomNavigationView = binding.bottomNav
         navView.setOnItemSelectedListener(onNavigationItemSelectedListener)
 
