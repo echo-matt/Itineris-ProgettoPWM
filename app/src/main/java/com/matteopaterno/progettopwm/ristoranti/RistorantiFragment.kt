@@ -46,9 +46,9 @@ class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
 
     }
 
-    override fun onItemClick(ristorente: RistorantiData) {
+    override fun onItemClick(ristorante: RistorantiData) {
         binding = FragmentRistorantiBinding.inflate(layoutInflater)
-        val fragment = DettagliRistorantiFragment.newInstance(ristorente)
+        val fragment = DettagliRistorantiFragment.newInstance(ristorante)
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
 
         transaction.setCustomAnimations(

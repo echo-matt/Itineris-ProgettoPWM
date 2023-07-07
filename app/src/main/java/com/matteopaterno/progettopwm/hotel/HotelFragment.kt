@@ -14,11 +14,12 @@ import com.google.gson.JsonObject
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentHotelBinding
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
+import com.matteopaterno.progettopwm.ristoranti.DettagliRistorantiFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HotelFragment : Fragment(){
+class HotelFragment : Fragment(), HotelAdapter.OnItemClickListener{
     lateinit var binding : FragmentHotelBinding
     private lateinit var hotelAdapter: HotelAdapter
 
@@ -32,6 +33,7 @@ class HotelFragment : Fragment(){
 
         binding.hotelRecyclerView.layoutManager = LinearLayoutManager(context)
         hotelAdapter = HotelAdapter(HotelDataListHolder.filteredHotelDataList)
+        hotelAdapter.setOnItemClickListener(this)
         binding.hotelRecyclerView.adapter = hotelAdapter
 
         binding.filterText.addTextChangedListener(object: TextWatcher{
@@ -49,7 +51,26 @@ class HotelFragment : Fragment(){
             }
 
         })
-
         return binding.root
+    }
+
+    override fun onItemClick(hotel: HotelData) {
+        binding = FragmentHotelBinding.inflate(layoutInflater)
+        val fragment = DettagliHotelFragment.newInstance(hotel)
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+
+        transaction.setCustomAnimations(
+            R.anim.slide_in_right, // Animazione di transizione in entrata per DettagliRistorantiFragment
+            R.anim.slide_out_left, // Animazione di transizione in uscita per RistorantiFragment
+            R.anim.slide_in_left, // Animazione di transizione in entrata per RistorantiFragment
+            R.anim.slide_out_right // Animazione di transizione in uscita per DettagliRistorantiFragment
+        )
+
+
+        transaction.replace(R.id.fragment_container, fragment)
+            .addToBackStack("Dettagli Hotel")
+            .commit()
+
+
     }
 }
