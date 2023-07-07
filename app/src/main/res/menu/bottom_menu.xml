@@ -19,9 +19,9 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/meteo"
-        android:icon="@drawable/baseline_wb_sunny_24"
-        android:title="Meteo"
+        android:id="@+id/attrazioni"
+        android:icon="@drawable/baseline_panorama_24"
+        android:title="Attrazioni"
         />
 
     <item

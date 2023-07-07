@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.matteopaterno.progettopwm.prenotazioni.PrenotazioneFragment
-import com.matteopaterno.progettopwm.R
+//import com.matteopaterno.progettopwm.prenotazioni.PrenotazioneFragment
 import com.matteopaterno.progettopwm.databinding.FragmentDettagliHotelBinding
-import com.matteopaterno.progettopwm.recensioni.RecensioniFragment
+import com.matteopaterno.progettopwm.info.InfoFragment
+
+//import com.matteopaterno.progettopwm.recensioni.RecensioniFragment
 
 class DettagliHotelFragment : Fragment() {
 
@@ -27,7 +28,7 @@ class DettagliHotelFragment : Fragment() {
         binding.textCitta.text = hotel?.id.toString()
         binding.ratingBar.rating = hotel?.rating!!
 
-        binding.bottonePrenota.setOnClickListener{
+       /* binding.bottonePrenota.setOnClickListener{
 
             val fragment = PrenotazioneFragment.newInstance(hotel!!)
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -36,14 +37,22 @@ class DettagliHotelFragment : Fragment() {
                 .addToBackStack("Fragment Prenotazioni")
                 .commit()
         }
+        */
 
-        binding.recensioniButton.setOnClickListener {
+        /*binding.recensioniButton.setOnClickListener {
             val fragment = RecensioniFragment.newInstance(hotel!!)
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
 
             transaction.replace(binding.fragmentContainerView.id, fragment)
                 .addToBackStack("Fragment Recensioni")
                 .commit()
+        }
+
+         */
+
+        binding.infoButton.setOnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.replace(binding.fragmentContainerView.id, InfoFragment())?.commit()
         }
 
 

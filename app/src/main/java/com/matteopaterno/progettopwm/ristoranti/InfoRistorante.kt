@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.matteopaterno.progettopwm.R
-import com.matteopaterno.progettopwm.databinding.FragmentMenuRistoranteBinding
+import com.matteopaterno.progettopwm.databinding.FragmentInfoRistoranteBinding
 
-class MenuRistorante : Fragment() {
-    private lateinit var binding: FragmentMenuRistoranteBinding
+class InfoRistorante : Fragment() {
+    private lateinit var binding: FragmentInfoRistoranteBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class MenuRistorante : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentMenuRistoranteBinding.inflate(layoutInflater)
+        binding = FragmentInfoRistoranteBinding.inflate(layoutInflater)
         super.onCreateView(inflater, container, savedInstanceState)
         return binding.root
     }

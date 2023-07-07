@@ -29,7 +29,6 @@ class DettagliAttrazioniFragment : Fragment() {
     private fun fillAttrazioneDetails(attrazione: AttrazioniData) {
         binding.textNome.text = attrazione.nome
         binding.textPosizione.text = attrazione.posizione
-        binding.ratingBar.rating = attrazione.rating
     }
 
     fun setAttrazione(attrazione: AttrazioniData) {

@@ -22,7 +22,6 @@ class AttrazioniAdapter(private val attrazioniDataList: ArrayList<AttrazioniData
     class ViewHolder(binding: AttrazioniCardViewBinding) : RecyclerView.ViewHolder(binding.root){
         val imageView = binding.imageView
         val nome = binding.textNome
-        val ratingBar = binding.ratingBar
         val posizione = binding.textPosizione
     }
 
@@ -39,7 +38,6 @@ class AttrazioniAdapter(private val attrazioniDataList: ArrayList<AttrazioniData
         val currentItem = attrazioniDataList[position]
         holder.imageView.setImageResource(currentItem.image)
         holder.nome.text = currentItem.nome
-        holder.ratingBar.rating = currentItem.rating
         holder.posizione.text = currentItem.posizione
 
         holder.itemView.setOnClickListener {

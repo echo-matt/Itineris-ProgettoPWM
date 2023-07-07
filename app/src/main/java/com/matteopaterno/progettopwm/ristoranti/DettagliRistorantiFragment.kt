@@ -16,8 +16,33 @@ class DettagliRistorantiFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         binding = FragmentDettagliRistorantiBinding.inflate(inflater, container, false)
+
+        binding.menu.setOnClickListener {
+            val menuFragment = parentFragmentManager.findFragmentByTag("MenuRistorante")
+
+            if (menuFragment == null) {
+                val startFragmentIsMenu = MenuRistorante()
+                parentFragmentManager.beginTransaction()
+                    .replace(binding.fragmentContainerView.id, startFragmentIsMenu, "MenuRistorante")
+                    .commit()
+            }
+        }
+
+        binding.recensioni.setOnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.replace(binding.fragmentContainerView.id, RecensioniRistorante())?.commit()
+        }
+
+        binding.info.setOnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.replace(binding.fragmentContainerView.id, InfoRistorante())?.commit()
+        }
+
+        binding.menu.callOnClick()
+
         return binding.root
     }
 

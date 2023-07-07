@@ -59,12 +59,7 @@ class AttrazioniFragment : Fragment(), AttrazioniAdapter.OnItemClickListener {
 
 
         transaction.replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
-
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
+            .addToBackStack("Dettagli Attrazioni")
             .commit()
     }
 }
