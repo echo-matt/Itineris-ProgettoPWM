@@ -156,7 +156,7 @@ class PrenotazioneFragment : Fragment() {
         }
     }
     fun effetuaPrenotazione(idUtente: Int?, idHotel: Int?, checkInDate: String, checkOutDate: String, guests: Int, ){
-       val query = "INSERT INTO webmobile.reservations (user_id, hotel_id, check_in_date, check_out_date, guests, payment_status) VALUES ('${idUtente}', '${idHotel}', '${checkInDate.toString()}', '${checkOutDate.toString()}', '${guests}', 'Pagato')"
+       val query = "INSERT INTO webmobile.hotel_reservations (user_id, hotel_id, check_in_date, check_out_date, guests, payment_status) VALUES ('${idUtente}', '${idHotel}', '${checkInDate.toString()}', '${checkOutDate.toString()}', '${guests}', 'Pagato')"
 
        ClientNetwork.retrofit.insert(query).enqueue(
            object : Callback<JsonObject> {
