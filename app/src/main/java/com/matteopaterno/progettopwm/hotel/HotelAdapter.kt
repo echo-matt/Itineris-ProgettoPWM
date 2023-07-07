@@ -32,4 +32,18 @@ class HotelAdapter(private val HotelLista: List<HotelData>) : RecyclerView.Adapt
         holder.ratingBar.rating = currentItem.rating?: 0.0f
         holder.posizione.text = currentItem.posizione?: ""
     }
+
+    fun filterRecyclerView(filterText: String){
+        val filteredList = if (filterText.isNotBlank()){
+            HotelDataListHolder.hotelDataList.filter { item ->
+                item.citta!!.contains(filterText, ignoreCase = true)
+            }.toMutableList()
+        }else{
+                HotelDataListHolder.hotelDataList.toMutableList()
+        }
+
+        HotelDataListHolder.filteredHotelDataList.clear()
+        HotelDataListHolder.filteredHotelDataList.addAll(filteredList)
+        notifyDataSetChanged()
+    }
 }

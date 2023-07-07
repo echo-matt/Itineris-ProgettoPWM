@@ -1,23 +1,19 @@
 package com.matteopaterno.progettopwm.home
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.matteopaterno.progettopwm.MainActivity
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.attrazioni.AttrazioniFragment
 import com.matteopaterno.progettopwm.databinding.ActivityHomeBinding
-import com.matteopaterno.progettopwm.hotel.HotelAdapter
-import com.matteopaterno.progettopwm.hotel.HotelData
-import com.matteopaterno.progettopwm.hotel.HotelDataCallback
+import com.matteopaterno.progettopwm.hotel.HotelDataDBRequest
 import com.matteopaterno.progettopwm.hotel.HotelFragment
 import com.matteopaterno.progettopwm.meteo.MeteoFragment
 import com.matteopaterno.progettopwm.profile.ProfileFragment
 import com.matteopaterno.progettopwm.ristoranti.RistorantiFragment
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(){
     private lateinit var binding: ActivityHomeBinding
 
     @SuppressLint("MissingInflatedId")
@@ -35,10 +31,9 @@ class HomeActivity : AppCompatActivity() {
                 .replace(binding.fragmentContainer.id, HomeFragment()).commit()
             navView.selectedItemId = R.id.home
         }
-        var hotel = HotelFragment()
-        var ristoranti = RistorantiFragment()
-       // hotel.createHotelList
-        ristoranti.createRistorantiList()
+
+        val hotelDataRepo = HotelDataDBRequest()
+        hotelDataRepo.createHotelList {} //Creo la lista degli hotel quando starta l'activity
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -54,8 +49,6 @@ class HomeActivity : AppCompatActivity() {
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.setReorderingAllowed(true)
                 transaction.replace(binding.fragmentContainer.id, MeteoFragment()).commit()
-
-
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -93,6 +86,4 @@ class HomeActivity : AppCompatActivity() {
         }
         false
     }
-
-
 }

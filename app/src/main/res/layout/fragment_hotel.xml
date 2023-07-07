@@ -7,11 +7,26 @@
     android:layout_height="wrap_content"
     tools:context=".hotel.HotelFragment">
 
+
+    <EditText
+        android:id="@+id/filterText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Filtra per città"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@id/hotelRecyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hotelRecyclerView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/filterText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

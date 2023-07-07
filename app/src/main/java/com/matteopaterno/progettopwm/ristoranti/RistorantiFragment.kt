@@ -14,10 +14,6 @@ import kotlin.random.Random
 class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
     private lateinit var binding: FragmentRistorantiBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,10 +46,6 @@ class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun onItemClick(ristorente: RistorantiData) {
         binding = FragmentRistorantiBinding.inflate(layoutInflater)
         val fragment = DettagliRistorantiFragment.newInstance(ristorente)
@@ -66,12 +58,12 @@ class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
             R.anim.slide_out_right // Animazione di transizione in uscita per DettagliRistorantiFragment
         )
 
-
-
+        transaction.replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
 
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
             .commit()
     }
 }
