@@ -11,6 +11,7 @@ import com.matteopaterno.progettopwm.hotel.HotelDataDBRequest
 import com.matteopaterno.progettopwm.hotel.HotelFragment
 import com.matteopaterno.progettopwm.meteo.MeteoFragment
 import com.matteopaterno.progettopwm.profile.ProfileFragment
+import com.matteopaterno.progettopwm.recensioni.RecensioniHotelDataDBRequest
 import com.matteopaterno.progettopwm.ristoranti.RistorantiFragment
 
 class HomeActivity : AppCompatActivity(){
@@ -34,6 +35,8 @@ class HomeActivity : AppCompatActivity(){
 
         val hotelDataRepo = HotelDataDBRequest()
         hotelDataRepo.createHotelList {} //Creo la lista degli hotel quando starta l'activity
+        val recensioniHotelDataRepo = RecensioniHotelDataDBRequest()
+        recensioniHotelDataRepo.createRecensioniList {  }
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
