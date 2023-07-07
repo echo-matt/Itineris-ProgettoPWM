@@ -38,7 +38,6 @@ class HotelFragment : Fragment(), HotelAdapter.OnItemClickListener{
 
         binding.filterText.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -47,9 +46,7 @@ class HotelFragment : Fragment(), HotelAdapter.OnItemClickListener{
             }
 
             override fun afterTextChanged(s: Editable?) {
-
             }
-
         })
         return binding.root
     }

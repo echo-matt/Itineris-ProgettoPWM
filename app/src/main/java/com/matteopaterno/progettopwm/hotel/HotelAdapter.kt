@@ -44,7 +44,7 @@ class HotelAdapter(private val HotelLista: List<HotelData>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentItem = HotelDataListHolder.hotelDataList[position]
+        val currentItem = HotelLista[position]
 
         //Settato valori default se non presenti in DB
         holder.imageView.setImageResource(currentItem.id?: 0)

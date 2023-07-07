@@ -48,7 +48,7 @@ class PrenotazioneFragment : Fragment() {
 
         val spinner = binding.spinnerGuest
         val guestsArray = resources.getIntArray(R.array.guests_array).toMutableList()
-        val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, binding.spinnerGuest.id, guestsArray)
+        val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinner.id, guestsArray)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = spinnerAdapter
         return binding.root
