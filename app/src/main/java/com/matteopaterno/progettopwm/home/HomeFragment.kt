@@ -34,6 +34,7 @@ class HomeFragment : Fragment() {
         binding.ristorantiRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.ristorantiRecyclerView.adapter = ristorantiAdapter
 
+
         return binding.root
     }
 

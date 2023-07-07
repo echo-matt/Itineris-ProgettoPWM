@@ -27,6 +27,7 @@ class HotelDataDBRequest {
                                 val jsonObject = queryset[j].asJsonObject //Salvo l'elemento j-esimo dell'array in un JsonObject
 
                                 //Accedo ai singoli campi del JSONObject
+                                val hotelId = jsonObject?.get("id")?.asInt
                                 val hotelName = jsonObject?.get("nome")?.asString
                                 val hotelAddress = jsonObject?.get("posizione")?.asString
                                 val hotelRating = jsonObject?.get("rating")?.asFloat
@@ -34,7 +35,7 @@ class HotelDataDBRequest {
                                 //Setto i dati del singolo hotel con quelli appena recuperati dal server
                                 data.add(
                                     HotelData(
-                                        R.drawable.photo_1506905925346_21bda4d32df4,
+                                        hotelId,
                                         hotelName,
                                         hotelAddress,
                                         hotelRating,

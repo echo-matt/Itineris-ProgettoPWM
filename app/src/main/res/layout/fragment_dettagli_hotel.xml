@@ -18,364 +18,396 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottonePrenota">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/imageHotel"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/pizzeria"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <RatingBar
-                        android:id="@+id/ratingBar"
-                        android:scaleX=".5"
-                        android:scaleY=".5"
-                        android:transformPivotX="0dp"
-                        android:transformPivotY="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:isIndicator="true"
-                        android:progressBackgroundTint="#33FFFF00"
-                        android:progressTint="#FFFF00"
-                        android:rating="3"
-                        android:layout_marginTop="5dp"
-                        android:secondaryProgressTint="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/imageHotel"
-                        app:layout_constraintTop_toBottomOf="@id/textPosizione"
-                        app:layout_constraintEnd_toEndOf="@+id/textNome"
-                        app:layout_constraintVertical_bias="0.05"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/textNome" />
-
-                    <TextView
-                        android:id="@+id/textPosizione"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintStart_toEndOf="@+id/imageLoc"
-                        app:layout_constraintTop_toBottomOf="@+id/textNome"
-                        tools:text="Via Roma 1, Città" />
-                    <TextView
-                        android:id="@+id/textCitta"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/textPosizione"
-                        app:layout_constraintTop_toTopOf="@id/textPosizione"
-                        app:layout_constraintBottom_toBottomOf="@id/textPosizione"
-                        android:textSize="16sp"
-                        android:layout_marginLeft="5dp"
-                        android:text="PROVAPROVA"
-                        android:textColor="@color/white"/>
-
-                    <TextView
-                        android:id="@+id/textNome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="30dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imageHotel"
-                        app:layout_constraintVertical_bias="0.1"
-                        tools:text="Nome hotel" />
-
-                    <ImageView
-                        android:id="@+id/imageLoc"
-                        android:layout_width="24dp"
-                        android:layout_height="21dp"
-                        android:src="@drawable/tag"
-                        app:layout_constraintBottom_toBottomOf="@id/textPosizione"
-                        app:layout_constraintEnd_toStartOf="@id/textPosizione"
-                        app:layout_constraintStart_toStartOf="@+id/textNome"
-                        app:layout_constraintTop_toTopOf="@+id/textPosizione" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/textServiziOfferti"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/cardView"
-                app:layout_constraintBottom_toTopOf="@id/gridLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="SERVIZI OFFERTI"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:textSize="20dp"/>
-
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="wrap_content"
-                android:layout_height="5dp"
-                app:layout_constraintTop_toBottomOf="@id/textServiziOfferti"
-                app:layout_constraintBottom_toTopOf="@id/gridLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <androidx.gridlayout.widget.GridLayout
-                android:id="@+id/gridLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/cardView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/textDescrizione"
-                android:layout_marginTop="30dp"
-                app:rowCount="2"
-                app:columnCount="4"
-                android:background="#FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    app:layout_columnWeight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
-
-                    <ImageView
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_fastfood_24" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Ristorante"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    app:layout_columnWeight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
-
-                    <ImageView
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/baseline_beach_access_24"
-                        android:layout_gravity="center"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Spiaggia"
-                        android:layout_gravity="center"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
-
-                    <ImageView
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_fastfood_24" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Ristorante"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
-
-                    <ImageView
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/baseline_beach_access_24"
-                        android:layout_gravity="center"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Spiaggia"
-                        android:layout_gravity="center"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    app:layout_columnWeight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
-
-                    <ImageView
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_fastfood_24" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Ristorante"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    app:layout_columnWeight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
-
-                    <ImageView
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/baseline_beach_access_24"
-                        android:layout_gravity="center"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Spiaggia"
-                        android:layout_gravity="center"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
-
-                    <ImageView
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_fastfood_24" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Ristorante"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
-
-                    <ImageView
-                        android:layout_height="40dp"
-                        android:layout_width="40dp"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/baseline_beach_access_24"
-                        android:layout_gravity="center"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Spiaggia"
-                        android:layout_gravity="center"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </androidx.gridlayout.widget.GridLayout>
-
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="wrap_content"
-                android:layout_height="5dp"
-                app:layout_constraintTop_toBottomOf="@id/gridLayout"
-                app:layout_constraintBottom_toTopOf="@id/textDescrizione"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <TextView
-                android:id="@+id/textDescrizione"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/gridLayout"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:text="asdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfa
-                sdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajs
-                hgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdaf
-                jaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfk
-                ajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgfasdafjask
-                hgfkajshgfkajshgfasdafjaskhgfkajshgfkajshgf
-asdafjaskhgfkajshgfkajshgf
-asdafjaskhgfkajshgfkajshgf
-asdafjaskhgfkajshgfkajshgf
-asdafjaskhgfkajshgfkajshgf"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </ScrollView>
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageHotel"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/pizzeria"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:isIndicator="true"
+                    android:progressBackgroundTint="#33FFFF00"
+                    android:progressTint="#FFFF00"
+                    android:rating="3"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:secondaryProgressTint="@color/black"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageHotel"
+                    app:layout_constraintEnd_toEndOf="@+id/textNome"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textNome"
+                    app:layout_constraintTop_toBottomOf="@id/textPosizione"
+                    app:layout_constraintVertical_bias="0.05" />
+
+                <TextView
+                    android:id="@+id/textPosizione"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageLoc"
+                    app:layout_constraintTop_toBottomOf="@+id/textNome"
+                    tools:text="Via Roma 1, Città" />
+
+                <TextView
+                    android:id="@+id/textCitta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="PROVAPROVA"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/textPosizione"
+                    app:layout_constraintStart_toEndOf="@id/textPosizione"
+                    app:layout_constraintTop_toTopOf="@id/textPosizione" />
+
+                <TextView
+                    android:id="@+id/textNome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageHotel"
+                    app:layout_constraintVertical_bias="0.1"
+                    tools:text="Nome hotel" />
+
+                <ImageView
+                    android:id="@+id/imageLoc"
+                    android:layout_width="24dp"
+                    android:layout_height="21dp"
+                    android:src="@drawable/tag"
+                    app:layout_constraintBottom_toBottomOf="@id/textPosizione"
+                    app:layout_constraintEnd_toStartOf="@id/textPosizione"
+                    app:layout_constraintStart_toStartOf="@+id/textNome"
+                    app:layout_constraintTop_toTopOf="@+id/textPosizione" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cardView">
+
+            <Button
+                android:id="@+id/recensioniButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:elevation="5dp"
+                android:text="Recensioni"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:text="Info"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/textServiziOfferti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="SERVIZI OFFERTI"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/gridLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            app:layout_constraintBottom_toTopOf="@id/gridLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textServiziOfferti" />
+
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            app:columnCount="4"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textServiziOfferti"
+            app:rowCount="2">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                app:layout_columnWeight="1">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/baseline_fastfood_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Ristorante"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                app:layout_columnWeight="1">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/baseline_beach_access_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Spiaggia"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                app:layout_columnWeight="1">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/baseline_fastfood_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Ristorante"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                app:layout_columnWeight="1">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/baseline_beach_access_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Spiaggia"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                app:layout_columnWeight="1">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/baseline_fastfood_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Ristorante"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                app:layout_columnWeight="1">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/baseline_beach_access_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Spiaggia"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                app:layout_columnWeight="1">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/baseline_fastfood_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Ristorante"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                app:layout_columnWeight="1">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/baseline_beach_access_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Spiaggia"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.gridlayout.widget.GridLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider2"
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gridLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/bottonePrenota"

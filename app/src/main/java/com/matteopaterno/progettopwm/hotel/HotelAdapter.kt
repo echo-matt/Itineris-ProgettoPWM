@@ -27,6 +27,7 @@ class HotelAdapter(private val HotelLista: List<HotelData>) : RecyclerView.Adapt
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION){
+                    val hotel = HotelLista[position]
                     onItemClickListener?.onItemClick(HotelLista[position])
                 }
             }
@@ -47,7 +48,7 @@ class HotelAdapter(private val HotelLista: List<HotelData>) : RecyclerView.Adapt
         val currentItem = HotelLista[position]
 
         //Settato valori default se non presenti in DB
-        holder.imageView.setImageResource(currentItem.id?: 0)
+
         holder.nome.text = currentItem.nome?: ""
         holder.ratingBar.rating = currentItem.rating?: 0.0f
         holder.posizione.text = currentItem.posizione?: ""
