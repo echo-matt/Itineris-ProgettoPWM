@@ -92,15 +92,14 @@ class DettagliHotelFragment : Fragment() {
                         for (i in 0 until services.size()) {
                             val serviceObject = services.get(i).asJsonObject
 
-                            // Check if the img_path and name values are present and not null
                             if (serviceObject.has("img") && !serviceObject.get("img").isJsonNull &&
                                 serviceObject.has("nome") && !serviceObject.get("nome").isJsonNull
                             ) {
                                 val imagePath = serviceObject.get("img").asString
                                 val serviceName = serviceObject.get("nome").asString
                                 if (!imagePath.isNullOrEmpty() && !serviceName.isNullOrEmpty()) {
-                                    val imageView = getServiceImageView(i) // Get the corresponding ImageView based on the index
-                                    val textView = getServiceNameTextView(i) // Get the corresponding TextView based on the index
+                                    val imageView = getServiceImageView(i)
+                                    val textView = getServiceNameTextView(i)
                                     setProfileImg(imagePath, imageView)
                                     setServiceName(serviceName, i)
                                 }
@@ -109,15 +108,14 @@ class DettagliHotelFragment : Fragment() {
                     }
 
                 } else {
-                    // Handle API call failure
-                    Toast.makeText(activity, "Error fetching service data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Errore nel recuperare i dati", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                // Handle network failure
+
                 t.printStackTrace()
-                Toast.makeText(activity, "Network request failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Errore nella richiesta", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -125,7 +123,6 @@ class DettagliHotelFragment : Fragment() {
 
     private fun getServiceImageView(serviceId: Int): ImageView {
         return when (serviceId) {
-            // Replace the service IDs and ImageView references with your actual values
             0 -> binding.image1
             1 -> binding.image2
             2 -> binding.image3
@@ -134,7 +131,7 @@ class DettagliHotelFragment : Fragment() {
             5 -> binding.image6
             6 -> binding.image7
             7 -> binding.image8
-            else -> binding.image1 // Provide a default ImageView in case the service ID is not found
+            else -> binding.image1
         }
     }
 
@@ -153,7 +150,7 @@ class DettagliHotelFragment : Fragment() {
             5 -> binding.textViewService6
             6 -> binding.textViewService7
             7 -> binding.textViewService8
-            else -> throw IllegalArgumentException("Invalid service index: $serviceIndex")
+            else -> throw IllegalArgumentException("Indice servizio non valido: $serviceIndex")
         }
     }
 
@@ -168,10 +165,10 @@ class DettagliHotelFragment : Fragment() {
                             if (bitmap != null) {
                                 imageView.setImageBitmap(bitmap)
                             } else {
-                                Log.d("ImageDecode", "Bitmap is null")
+                                Log.d("ImageDecode", "Bitmap null")
                             }
                         } else {
-                            Log.d("ImageResponse", "Unsuccessful response: ${response.code()}")
+                            Log.d("ImageResponse", "Richiesta fallita, codice: ${response.code()}")
                         }
                     }
 
@@ -180,7 +177,7 @@ class DettagliHotelFragment : Fragment() {
                 }
             )
         }else {
-            Log.d("ImageView", "ImageView is null")
+            Log.d("ImageView", "ImageView null")
         }
 
     }
