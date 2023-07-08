@@ -1,6 +1,7 @@
 package com.matteopaterno.progettopwm.home
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -19,6 +20,8 @@ class HomeActivity : AppCompatActivity(){
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        val loginPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+
         binding = ActivityHomeBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -36,7 +39,7 @@ class HomeActivity : AppCompatActivity(){
         val hotelDataRepo = HotelDataDBRequest()
         hotelDataRepo.createHotelList {} //Creo la lista degli hotel quando starta l'activity
         val recensioniHotelDataRepo = RecensioniHotelDataDBRequest()
-        recensioniHotelDataRepo.createRecensioniList {  }
+        recensioniHotelDataRepo.createRecensioniList { }
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

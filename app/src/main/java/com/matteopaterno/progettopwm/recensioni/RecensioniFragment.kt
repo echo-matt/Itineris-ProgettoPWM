@@ -44,11 +44,12 @@ class RecensioniFragment : Fragment() {
         binding.sendButton.setOnClickListener {
             testo = binding.editTextText.text.toString()
             val idUtente = loginPreferences.getString("id", "")?.toInt()
+            val nomeUtente = loginPreferences.getString("nome", "")
             val idHotel = hotel?.id!!
             val rating = binding.ratingBar.rating
             inviaRecensioneHotel(idHotel, idUtente, testo, rating) {success ->
                 if (success){
-                    val newReview = RecensioniHotelData(testo, idUtente, idHotel, rating)
+                    val newReview = RecensioniHotelData(testo, idUtente, nomeUtente,  idHotel, rating)
                     RecensioniDataListHolder.recensioniHotelDataList.add(newReview)
                     RecensioniAdapter(RecensioniDataListHolder.recensioniHotelDataList).notifyItemInserted(RecensioniDataListHolder.recensioniHotelDataList.size - 1)
                     recyclerView.scrollToPosition(RecensioniDataListHolder.recensioniHotelDataList.size - 1)

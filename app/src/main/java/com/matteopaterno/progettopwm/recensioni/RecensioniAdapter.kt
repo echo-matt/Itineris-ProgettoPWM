@@ -29,7 +29,7 @@ class RecensioniAdapter(private val reviews: List<RecensioniHotelData>): Recycle
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = reviews[position]
 
-        holder.textViewUserName.text = currentItem.user_id.toString()
+        holder.textViewUserName.text = currentItem.nomeUtente
         holder.ratingBar.rating = currentItem.rating!!
         holder.textViewComment.text = currentItem.testo
     }

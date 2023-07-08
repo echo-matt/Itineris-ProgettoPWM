@@ -8,9 +8,16 @@ import retrofit2.Response
 
 class RecensioniHotelDataDBRequest {
 
-    fun createRecensioniList(callback: (List<RecensioniHotelData>) -> Unit){
+
+    fun createRecensioniList(
+        callback: (List<RecensioniHotelData>) -> Unit
+    ){
         val data = ArrayList<RecensioniHotelData>()
-        val query = "select * from recensioni_hotel"
+        val query = """
+        SELECT r.*, u.nome
+        FROM recensioni_hotel r
+        INNER JOIN users u ON r.user_id = u.id
+    """.trimIndent()
 
         ClientNetwork.retrofit.select(query).enqueue(
             object : Callback<JsonObject>{
@@ -25,16 +32,17 @@ class RecensioniHotelDataDBRequest {
                             for (j in 0 until queryset.size()){
                                 val jsonObject = queryset[j].asJsonObject
 
-                                val recensioneId = jsonObject?.get("id")?.asInt
                                 val testo = jsonObject?.get("testo")?.asString
                                 val userId = jsonObject?.get("user_id")?.asInt
                                 val hotelId = jsonObject?.get("hotel_id")?.asInt
                                 val rating = jsonObject?.get("rating")?.asFloat
+                                val nomeUtente = jsonObject?.get("nome")?.asString
 
                                 data.add(
                                     RecensioniHotelData(
                                         testo,
                                         userId,
+                                        nomeUtente,
                                         hotelId,
                                         rating
                                     )
