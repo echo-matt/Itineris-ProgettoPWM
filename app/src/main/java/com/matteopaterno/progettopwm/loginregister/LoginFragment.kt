@@ -72,6 +72,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun loginUtente(username: String, password: String){
+        var img: String?
 
         val query1 = "select * from users where username = '${username}' and password = '${password}';"
 
@@ -89,7 +90,12 @@ class LoginFragment : Fragment() {
                             val nome = jsonObject?.get("nome")?.asString
                             val cognome = jsonObject?.get("cognome")?.asString
                             val id = jsonObject?.get("id")?.asString
-                            val img = jsonObject?.get("img")?.asString
+                            if (jsonObject?.get("img")?.isJsonNull == true) {
+                                Toast.makeText(context, "Nessuna immagine caricata", Toast.LENGTH_SHORT).show()
+                                img = ""
+                            } else {
+                                img = jsonObject?.get("img")?.asString
+                            }
 
                             //Se la checkbox e' selezionata, salva nelle shared preferences username, password, il voler essere ricordati, e lo stato di login
                             if (binding.rememberMeCheckbox.isChecked){
