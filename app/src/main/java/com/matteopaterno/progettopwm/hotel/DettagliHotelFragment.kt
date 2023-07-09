@@ -22,6 +22,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayInputStream
 
 
 class DettagliHotelFragment : Fragment() {
@@ -70,6 +71,7 @@ class DettagliHotelFragment : Fragment() {
             transaction?.replace(binding.fragmentContainerView.id, InfoFragment())?.commit()
         }
 
+        getHotelImage(hotelId)
         getServiceImage(hotelId)
 
 
@@ -77,6 +79,63 @@ class DettagliHotelFragment : Fragment() {
         return binding.root
 
     }
+
+    private fun getHotelImage(hotelId: Int?) {
+
+        val query = "SELECT img FROM hotels WHERE id = $hotelId"
+
+        ClientNetwork.retrofit.select(query).enqueue(
+            object : Callback<JsonObject>{
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        val jsonResponse = response.body()
+                        val jsonArray = jsonResponse?.getAsJsonArray("queryset")
+                        if (jsonArray != null && jsonArray.size() > 0) {
+                            val jsonObject = jsonArray.get(0).asJsonObject
+                            if (jsonObject != null) {
+                                val imagePath = jsonObject.get("img").asString
+                                setHotelImage(imagePath)
+                            }
+                        }
+
+
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            }
+        )
+    }
+
+    private fun setHotelImage(url: String?) {
+        ClientNetwork.retrofit.image(url!!).enqueue(
+            object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if (response.isSuccessful) {
+                        val image: Bitmap? = BitmapFactory.decodeStream(
+                            ByteArrayInputStream(
+                                response.body()!!.bytes()
+                            )
+                        )
+                        binding.imageHotel.setImageBitmap(image)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    t.printStackTrace()
+                    t.printStackTrace()
+                    Toast.makeText(activity, "Richiesta fallita", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
+
 
     private fun getServiceImage(hotelId: Int?) {
 

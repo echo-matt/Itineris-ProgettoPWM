@@ -1,18 +1,20 @@
-import android.os.Parcel
-import android.os.Parcelable
+package com.matteopaterno.progettopwm.ristoranti
 import com.google.gson.annotations.SerializedName
 
 data class RistorantiData(
-    var image: Int,
 
-    var image2: Int,
+    @SerializedName("id")
+    var id: Int?,
 
     @SerializedName("nome")
-    var nome: String,
+    var nome: String?,
 
     @SerializedName("posizione")
-    var posizione: String,
+    var posizione: String?,
 
     @SerializedName("rating")
-    var rating: Float
+    var rating: Float?,
+
+    @SerializedName("citta")
+    var citta: String?
 )

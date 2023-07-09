@@ -13,6 +13,7 @@ import com.matteopaterno.progettopwm.hotel.HotelFragment
 import com.matteopaterno.progettopwm.meteo.MeteoFragment
 import com.matteopaterno.progettopwm.profile.ProfileFragment
 import com.matteopaterno.progettopwm.recensioni.RecensioniHotelDataDBRequest
+import com.matteopaterno.progettopwm.ristoranti.RistorantiDataDBRequest
 import com.matteopaterno.progettopwm.ristoranti.RistorantiFragment
 
 class HomeActivity : AppCompatActivity(){
@@ -37,7 +38,11 @@ class HomeActivity : AppCompatActivity(){
         }
 
         val hotelDataRepo = HotelDataDBRequest()
-        hotelDataRepo.createHotelList {} //Creo la lista degli hotel quando starta l'activity
+        hotelDataRepo.createHotelList {  } //Creo la lista degli hotel quando starta l'activity
+
+        val ristorantiDataRepo = RistorantiDataDBRequest()
+        ristorantiDataRepo.createRistorantiList {  }
+
         val recensioniHotelDataRepo = RecensioniHotelDataDBRequest()
         recensioniHotelDataRepo.createRecensioniList { }
     }
@@ -75,12 +80,6 @@ class HomeActivity : AppCompatActivity(){
             R.id.attrazioni -> {
                 supportFragmentManager.beginTransaction()
                     .replace(binding.fragmentContainer.id, AttrazioniFragment()).commit()
-                return@OnNavigationItemSelectedListener true
-            }
-
-            R.id.meteo -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(binding.fragmentContainer.id, MeteoFragment()).commit()
                 return@OnNavigationItemSelectedListener true
             }
 

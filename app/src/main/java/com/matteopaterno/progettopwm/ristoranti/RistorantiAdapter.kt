@@ -1,6 +1,5 @@
 package com.matteopaterno.progettopwm.ristoranti
 
-import RistorantiData
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,11 +18,21 @@ class RistorantiAdapter(private val ristorantiDataList: List<RistorantiData>) : 
         onItemClickListener = listener
     }
 
-    class ViewHolder(binding: RistorantiCardViewBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(binding: RistorantiCardViewBinding) : RecyclerView.ViewHolder(binding.root){
         val imageView = binding.imageView
         val nome = binding.textNome
         val ratingBar = binding.ratingBar
         val posizione = binding.textPosizione
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION){
+                    val ristorante = ristorantiDataList[position]
+                    onItemClickListener?.onItemClick(ristorantiDataList[position])
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,10 +46,10 @@ class RistorantiAdapter(private val ristorantiDataList: List<RistorantiData>) : 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = ristorantiDataList[position]
-        holder.imageView.setImageResource(currentItem.image)
-        holder.nome.text = currentItem.nome
-        holder.ratingBar.rating = currentItem.rating
-        holder.posizione.text = currentItem.posizione
+
+        holder.nome.text = currentItem.nome?: ""
+        holder.ratingBar.rating = currentItem.rating?: 0.0f
+        holder.posizione.text = currentItem.posizione?: ""
 
         holder.itemView.setOnClickListener {
             onItemClickListener?.onItemClick(currentItem)

@@ -1,6 +1,5 @@
 package com.matteopaterno.progettopwm.ristoranti
 
-import RistorantiData
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,20 +12,28 @@ import kotlin.random.Random
 
 class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
     private lateinit var binding: FragmentRistorantiBinding
+    private lateinit var ristorantiAdapter: RistorantiAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRistorantiBinding.inflate(layoutInflater)
         super.onCreateView(inflater, container, savedInstanceState)
-        binding.ristorantiRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding = FragmentRistorantiBinding.inflate(layoutInflater)
 
-        binding.ristorantiRecyclerView.adapter = createRistorantiList()
+        binding.ristorantiRecyclerView.layoutManager = LinearLayoutManager(context)
+        ristorantiAdapter = RistorantiAdapter(RistorantiDataListHolder.RistorantiDataList)
+        ristorantiAdapter.setOnItemClickListener(this)
+        binding.ristorantiRecyclerView.adapter = ristorantiAdapter
+
+        //TODO Filter
+
+        //binding.ristorantiRecyclerView.adapter = createRistorantiList()
         return binding.root
     }
+// TODO CONTINUA A COPIARE DA HOTEL PER AVERE STESSO RISULTATO
 
-    fun createRistorantiList(): RistorantiAdapter {
+    /*fun createRistorantiList(): RistorantiAdapter {
         val data = ArrayList<RistorantiData>()
         for (i in 1..20) {
             data.add(
@@ -46,6 +53,8 @@ class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
 
     }
 
+     */
+
     override fun onItemClick(ristorante: RistorantiData) {
         binding = FragmentRistorantiBinding.inflate(layoutInflater)
         val fragment = DettagliRistorantiFragment.newInstance(ristorante)
@@ -59,11 +68,7 @@ class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
         )
 
         transaction.replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
-
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
+            .addToBackStack("Dettagli ristorante")
             .commit()
     }
 }
