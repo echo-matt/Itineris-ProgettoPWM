@@ -2,6 +2,7 @@ package com.matteopaterno.progettopwm.hotel
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -75,7 +76,8 @@ class DettagliHotelFragment : Fragment() {
         getServiceImage(hotelId)
 
 
-
+        val overlay: Drawable = resources.getDrawable(R.drawable.shadow_bg)
+        binding.imageHotel.foreground = overlay
         return binding.root
 
     }
@@ -95,6 +97,7 @@ class DettagliHotelFragment : Fragment() {
                             if (jsonObject != null) {
                                 val imagePath = jsonObject.get("img").asString
                                 setHotelImage(imagePath)
+
                             }
                         }
 
@@ -121,6 +124,7 @@ class DettagliHotelFragment : Fragment() {
                         val image: Bitmap? = BitmapFactory.decodeStream(
                             ByteArrayInputStream(
                                 response.body()!!.bytes()
+
                             )
                         )
                         binding.imageHotel.setImageBitmap(image)

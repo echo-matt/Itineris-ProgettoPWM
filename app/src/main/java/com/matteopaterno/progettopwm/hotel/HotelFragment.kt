@@ -1,23 +1,15 @@
 package com.matteopaterno.progettopwm.hotel
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.JsonObject
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentHotelBinding
-import com.matteopaterno.progettopwm.retrofit.ClientNetwork
-import com.matteopaterno.progettopwm.ristoranti.DettagliRistorantiFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HotelFragment : Fragment(), HotelAdapter.OnItemClickListener{
     lateinit var binding : FragmentHotelBinding

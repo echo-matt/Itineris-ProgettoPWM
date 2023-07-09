@@ -1,4 +1,5 @@
 package com.matteopaterno.progettopwm.hotel
+import android.graphics.Bitmap
 import com.google.gson.annotations.SerializedName
 
 data class HotelData(
@@ -16,5 +17,5 @@ data class HotelData(
     var rating: Float?,
 
     @SerializedName("citta")
-    var citta: String?
+    var citta: String?,
 )
