@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.matteopaterno.progettopwm.R
+import com.matteopaterno.progettopwm.attrazioni.AttrazioniDataDBRequest
 import com.matteopaterno.progettopwm.attrazioni.AttrazioniFragment
 import com.matteopaterno.progettopwm.databinding.ActivityHomeBinding
 import com.matteopaterno.progettopwm.hotel.HotelDataDBRequest
@@ -45,6 +46,10 @@ class HomeActivity : AppCompatActivity(){
 
         val recensioniHotelDataRepo = RecensioniHotelDataDBRequest()
         recensioniHotelDataRepo.createRecensioniList { }
+
+        val attrazioniDataHotelRepo = AttrazioniDataDBRequest()
+        attrazioniDataHotelRepo.createAttrazioniList {  }
+
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

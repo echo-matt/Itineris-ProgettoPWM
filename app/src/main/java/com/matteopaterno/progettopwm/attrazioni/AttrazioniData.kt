@@ -1,14 +1,16 @@
 import com.google.gson.annotations.SerializedName
 
 data class AttrazioniData(
-    var image: Int,
+
+    @SerializedName("id")
+    var id: Int?,
 
     @SerializedName("nome")
-    var nome: String,
+    var nome: String?,
 
-    @SerializedName("posizione")
-    var posizione: String,
+    @SerializedName("descrizione")
+    var descrizione: String?,
 
-    @SerializedName("rating")
-    var rating: Float
+    @SerializedName("citta")
+    var citta: String?
 )

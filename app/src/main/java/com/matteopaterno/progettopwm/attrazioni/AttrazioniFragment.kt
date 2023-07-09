@@ -9,44 +9,28 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentAttrazioniBinding
-import kotlin.random.Random
 
 class AttrazioniFragment : Fragment(), AttrazioniAdapter.OnItemClickListener {
     private lateinit var binding: FragmentAttrazioniBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var attrazioniAdapter: AttrazioniAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAttrazioniBinding.inflate(layoutInflater)
         super.onCreateView(inflater, container, savedInstanceState)
+        binding = FragmentAttrazioniBinding.inflate(layoutInflater)
+
         binding.attrazioniRecyclerView.layoutManager = LinearLayoutManager(context)
+        attrazioniAdapter = AttrazioniAdapter(AttrazioniDataListHolder.AttrazioniDataList)
+        attrazioniAdapter.setOnItemClickListener(this)
+        binding.attrazioniRecyclerView.adapter = attrazioniAdapter
 
-        val data = ArrayList<AttrazioniData>()
-        for (i in 1..20){
-            data.add(
-                AttrazioniData(R.drawable.photo_1506905925346_21bda4d32df4,
-                    "Attrazione $i",
-                    "Via Milano $i",
-                    Random.nextFloat() * (5 - 0))
-            )
-        }
-
-        val adapter = AttrazioniAdapter(data)
-        adapter.setOnItemClickListener(this)
-        binding.attrazioniRecyclerView.adapter = adapter
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun onItemClick(attrazione: AttrazioniData) {
+        binding = FragmentAttrazioniBinding.inflate(layoutInflater)
         val fragment = DettagliAttrazioniFragment.newInstance(attrazione)
         val transaction = requireActivity().supportFragmentManager.beginTransaction()
 

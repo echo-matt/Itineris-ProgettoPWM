@@ -2,16 +2,16 @@ package com.matteopaterno.progettopwm.ristoranti
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.gson.JsonObject
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentDettagliRistorantiBinding
-import com.matteopaterno.progettopwm.hotel.HotelDataListHolder
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -61,6 +61,8 @@ class DettagliRistorantiFragment : Fragment() {
 
 
         getRistoranteImage(ristoranteId)
+        val overlay: Drawable = resources.getDrawable(R.drawable.shadow_bg)
+        binding.imageHotel.foreground = overlay
         return binding.root
     }
 

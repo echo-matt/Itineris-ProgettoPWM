@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.gson.JsonObject
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.HotelCardViewDesignBinding
@@ -66,17 +67,6 @@ class HotelAdapter(private val HotelLista: List<HotelData>) : RecyclerView.Adapt
             holder.imageView.foreground = overlay
         }
 
-        /*
-        getHotelImage(currentItem.id) { imagePath ->
-            setHotelImage(imagePath, holder.imageView)
-            val overlay: Drawable? = ContextCompat.getDrawable(holder.imageView.context, R.drawable.shadow_bg)
-            holder.imageView.foreground = overlay
-        }
-
-         */
-
-        //Settato valori default se non presenti in DB
-
         holder.nome.text = currentItem.nome?: ""
         holder.ratingBar.rating = currentItem.rating?: 0.0f
         holder.posizione.text = currentItem.posizione?: ""
@@ -128,7 +118,9 @@ class HotelAdapter(private val HotelLista: List<HotelData>) : RecyclerView.Adapt
                             )
                         )
 
-                        imageView.setImageBitmap(image)
+                        Glide.with(imageView)
+                            .load(image)
+                            .into(imageView)
                     }
                 }
 

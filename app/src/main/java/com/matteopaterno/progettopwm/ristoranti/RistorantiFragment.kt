@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentRistorantiBinding
-import kotlin.random.Random
 
 class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
     private lateinit var binding: FragmentRistorantiBinding
@@ -28,32 +27,8 @@ class RistorantiFragment : Fragment(), RistorantiAdapter.OnItemClickListener {
 
         //TODO Filter
 
-        //binding.ristorantiRecyclerView.adapter = createRistorantiList()
         return binding.root
     }
-// TODO CONTINUA A COPIARE DA HOTEL PER AVERE STESSO RISULTATO
-
-    /*fun createRistorantiList(): RistorantiAdapter {
-        val data = ArrayList<RistorantiData>()
-        for (i in 1..20) {
-            data.add(
-                RistorantiData(
-                    R.drawable.photo_1506905925346_21bda4d32df4, R.drawable.tag,
-                    "Ristorante $i",
-                    "Via roma $i",
-                    Random.nextFloat() * (5 - 0)
-                )
-            )
-        }
-        RistorantiDataListHolder.RistorantiDataList.addAll(data)
-
-        val adapter = RistorantiAdapter(data)
-        adapter.setOnItemClickListener(this)
-        return adapter
-
-    }
-
-     */
 
     override fun onItemClick(ristorante: RistorantiData) {
         binding = FragmentRistorantiBinding.inflate(layoutInflater)

@@ -36,8 +36,7 @@
                         android:id="@+id/imageAttrazione"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/san_vito_lo_capo"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -48,11 +47,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
+                        android:layout_marginTop="5dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintStart_toEndOf="@+id/imageLoc"
-                        app:layout_constraintTop_toBottomOf="@+id/textNome"
-                        tools:text="Via Roma 1, Città" />
+                        app:layout_constraintTop_toBottomOf="@+id/textNome" />
 
                     <TextView
                         android:id="@+id/textNome"
@@ -77,18 +76,19 @@
                         app:layout_constraintBottom_toBottomOf="@id/textPosizione"
                         app:layout_constraintEnd_toStartOf="@id/textPosizione"
                         app:layout_constraintStart_toStartOf="@+id/textNome"
-                        app:layout_constraintTop_toBottomOf="@+id/textNome" />
+                        app:layout_constraintTop_toTopOf="@id/textPosizione" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/descrizione"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/provaString"
-                android:textColor="@color/blue"
+                android:textColor="@color/black"
+                android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
