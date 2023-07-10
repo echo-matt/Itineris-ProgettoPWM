@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import com.google.gson.JsonObject
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentDettagliRistorantiBinding
-import com.matteopaterno.progettopwm.prenotazioni.PrenotazioneRistorantiFragment
+import com.matteopaterno.progettopwm.recensioni.RecensioniFragment
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -36,30 +36,21 @@ class DettagliRistorantiFragment : Fragment() {
         binding.ratingBar.rating = ristorante?.rating!!
         val ristoranteId = ristorante?.id
 
-        binding.bottonePrenota.setOnClickListener {
-            val fragment = PrenotazioneRistorantiFragment.newInstance(ristorante!!)
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
 
-            transaction.replace(R.id.fragment_container, fragment)
-                .addToBackStack("Fragment Prenotazioni")
-                .commit()
-        }
+        binding.recensioni.setOnClickListener {
+            val recensioniFragment = parentFragmentManager.findFragmentByTag("RecensioniRistorante")
 
-
-        binding.menu.setOnClickListener {
-            val menuFragment = parentFragmentManager.findFragmentByTag("MenuRistorante")
-
-            if (menuFragment == null) {
-                val startFragmentIsMenu = MenuRistorante()
+            if (recensioniFragment == null) {
+                val startFragmentIsRecension = RecensioniFragment()
                 parentFragmentManager.beginTransaction()
-                    .replace(binding.fragmentContainerView.id, startFragmentIsMenu, "MenuRistorante")
+                    .replace(binding.fragmentContainerView.id, startFragmentIsRecension, "RecensioniRistorante")
                     .commit()
             }
         }
 
         binding.recensioni.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.replace(binding.fragmentContainerView.id, RecensioniRistorante())?.commit()
+            transaction?.replace(binding.fragmentContainerView.id, RecensioniFragment())?.commit()
         }
 
         binding.info.setOnClickListener {
@@ -67,7 +58,7 @@ class DettagliRistorantiFragment : Fragment() {
             transaction?.replace(binding.fragmentContainerView.id, InfoRistorante())?.commit()
         }
 
-        binding.menu.callOnClick()
+        binding.recensioni.callOnClick()
 
 
         getRistoranteImage(ristoranteId)

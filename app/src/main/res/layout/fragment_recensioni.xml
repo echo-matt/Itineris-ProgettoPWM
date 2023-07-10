@@ -36,6 +36,9 @@
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:progressBackgroundTint="#33FFFF00"
+        android:progressTint="#FFFF00"
+        android:secondaryProgressTint="@color/black"
         app:layout_constraintTop_toBottomOf="@id/editTextText"
         app:layout_constraintStart_toStartOf="@id/editTextText"/>
 

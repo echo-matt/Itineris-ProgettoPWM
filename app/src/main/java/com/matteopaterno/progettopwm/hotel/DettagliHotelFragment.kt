@@ -19,6 +19,7 @@ import com.matteopaterno.progettopwm.info.InfoFragment
 import com.matteopaterno.progettopwm.prenotazioni.PrenotazioneHotelFragment
 import com.matteopaterno.progettopwm.recensioni.RecensioniFragment
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
+import com.matteopaterno.progettopwm.ristoranti.RecensioniRistorante
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,7 +57,7 @@ class DettagliHotelFragment : Fragment() {
         }
 
 
-        binding.recensioniButton.setOnClickListener {
+        /*binding.recensioniButton.setOnClickListener {
             val fragment = RecensioniFragment.newInstance(hotel!!)
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
 
@@ -65,7 +66,20 @@ class DettagliHotelFragment : Fragment() {
                 .commit()
         }
 
+         */
 
+        binding.recensioniButton.setOnClickListener {
+            val recensioniButtonFragment = parentFragmentManager.findFragmentByTag("RecensioniHotel")
+
+            if (recensioniButtonFragment == null) {
+                val startFragmentIsRecension = RecensioniFragment()
+                parentFragmentManager.beginTransaction()
+                    .replace(binding.fragmentContainerView.id, startFragmentIsRecension, "RecensioniHotel")
+                    .commit()
+            }
+        }
+
+        binding.recensioniButton.callOnClick()
 
         binding.infoButton.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
