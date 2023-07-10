@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,9 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.gson.JsonObject
-import com.matteopaterno.progettopwm.databinding.FragmentPrenotazioneBinding
+import com.matteopaterno.progettopwm.databinding.FragmentPrenotazioneHotelBinding
 import com.matteopaterno.progettopwm.hotel.HotelData
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
 import retrofit2.Call
@@ -24,8 +24,8 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class PrenotazioneFragment : Fragment() {
-    private lateinit var binding: FragmentPrenotazioneBinding
+class PrenotazioneHotelFragment : Fragment() {
+    private lateinit var binding: FragmentPrenotazioneHotelBinding
     private lateinit var calendar: Calendar
     private lateinit var loginPreferences : SharedPreferences
     private lateinit var loginPrefsEditor : SharedPreferences.Editor
@@ -53,7 +53,7 @@ class PrenotazioneFragment : Fragment() {
         val idUtente = loginPreferences.getString("id", "")?.toInt()
 
         var checkInFocused: Boolean
-        binding = FragmentPrenotazioneBinding.inflate(layoutInflater)
+        binding = FragmentPrenotazioneHotelBinding.inflate(layoutInflater)
         calendar = Calendar.getInstance()
 
         binding.editTextCheckIn.isFocusable = false
@@ -62,8 +62,6 @@ class PrenotazioneFragment : Fragment() {
             checkInFocused = true
             showDatePicker(checkInFocused)
         }
-
-        binding.ospitiText.text = hotel?.id.toString()
 
         binding.editTextCheckOut.isFocusable = false
         binding.editTextCheckOut.isClickable = true
@@ -102,11 +100,12 @@ class PrenotazioneFragment : Fragment() {
 
 
         binding.cartButton.setOnClickListener {
-            val prenotazione = HotelPrenotazioneData(null, idUtente, hotel?.nome, checkInDateString, checkOutDateString, guests, "Pagato")
+            val randId = (1..50000).random()
+            val prenotazione = PrenotazioneData(randId, hotel?.nome, hotel?.posizione, checkInDateString, checkOutDateString, hotel?.citta, ReservationType.HOTEL)
             ManagerCarrello.aggiungiAlCarrello(prenotazione)
             Toast.makeText(context, "Prenotazione aggiunta", Toast.LENGTH_SHORT).show()
-
         }
+
         return binding.root
     }
 
@@ -149,8 +148,8 @@ class PrenotazioneFragment : Fragment() {
     }
 
     companion object{
-        fun newInstance(hotel: HotelData): PrenotazioneFragment {
-            val fragment = PrenotazioneFragment()
+        fun newInstance(hotel: HotelData): PrenotazioneHotelFragment {
+            val fragment = PrenotazioneHotelFragment()
             fragment.setHotel(hotel)
             return fragment
         }

@@ -34,7 +34,7 @@ class CarrelloFragment : Fragment() {
         populateTable(prenotazioniHotel)
 
         binding.button.setOnClickListener {
-            val f = PrenotazioneFragment()
+            val f = PrenotazioneHotelFragment()
             for (item in prenotazioniHotel){
             }
         }
