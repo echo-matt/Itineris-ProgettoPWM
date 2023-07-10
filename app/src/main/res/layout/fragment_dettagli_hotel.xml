@@ -207,7 +207,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/baseline_fastfood_24" />
+                     />
 
                 <TextView
                     android:id="@+id/textViewService1"
@@ -215,7 +215,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Ristorante"
+                    
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -234,7 +234,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/baseline_beach_access_24" />
+                     />
 
                 <TextView
                     android:id="@+id/textViewService2"
@@ -242,7 +242,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Spiaggia"
+                    
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -261,7 +261,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/baseline_fastfood_24" />
+                     />
 
                 <TextView
                     android:id="@+id/textViewService3"
@@ -269,7 +269,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Ristorante"
+                    
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -288,7 +288,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/baseline_beach_access_24" />
+                     />
 
                 <TextView
                     android:id="@+id/textViewService4"
@@ -296,7 +296,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Spiaggia"
+                    
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -315,14 +315,14 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/baseline_fastfood_24" />
+                     />
 
                 <TextView
                     android:id="@+id/textViewService5"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Ristorante"
+                    
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -341,7 +341,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/baseline_beach_access_24" />
+                     />
 
                 <TextView
                     android:id="@+id/textViewService6"
@@ -349,7 +349,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Spiaggia"
+                    
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -368,7 +368,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/baseline_fastfood_24" />
+                     />
 
                 <TextView
                     android:id="@+id/textViewService7"
@@ -376,7 +376,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Ristorante"
+                    
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -395,7 +395,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
-                    android:src="@drawable/baseline_beach_access_24" />
+                     />
 
                 <TextView
                     android:id="@+id/textViewService8"
@@ -403,7 +403,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Spiaggia"
+                    
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -444,6 +444,6 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 
-    <!-- Aggiungi altri componenti UI per visualizzare ulteriori dettagli del ristorante -->
+    <!-- Aggiungi altri componenti UI per visualizzare ulteriori dettagli del  -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

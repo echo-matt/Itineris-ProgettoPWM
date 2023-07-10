@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".ristoranti.InfoRistorante">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Info ristorante" />
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="Volevamo implementare la mappa Google, ma le richieste API si pagano!!" />
 
 </FrameLayout>

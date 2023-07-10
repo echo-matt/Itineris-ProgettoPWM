@@ -42,19 +42,13 @@ class PrenotazioniEffettuate : Fragment() {
 
     private fun caricaPrenotazioni() {
 
-        val query = """
-        SELECT * FROM (
-            SELECT 'hotel' AS type, id, hotel_id AS entity_id, check_in_date, check_out_date, guests, citta
-            FROM hotel_reservations
-            WHERE user_id = $userId
-            UNION ALL
-            SELECT 'restaurant' AS type, id, ristorante_id AS entity_id, reservation_date, reservation_time, guests
-            FROM restaurant_reservations
-            WHERE user_id = $userId
-        ) AS reservations
-        LEFT JOIN hotels ON reservations.entity_id = hotels.id
-        LEFT JOIN restaurants ON reservations.entity_id = restaurants.id
-    """.trimIndent()
+        val query = "SELECT id, user_id, hotel_id, check_in_date, check_out_date, guests" +
+                "FROM hotel_reservations" +
+                "WHERE user_id = $userId" +
+                "UNION" +
+                "SELECT id, user_id, ristorante_id, guests, reservation_date, reservation_time" +
+                "FROM restaurant_reservation" +
+                "WHERE user_id = $userId;"
 
         ClientNetwork.retrofit.select(query).enqueue(
             object : Callback<JsonObject>{
@@ -117,11 +111,10 @@ class PrenotazioniEffettuate : Fragment() {
             val type = jsonObject.get("type").asString
 
             val id = jsonObject.get("id").asInt
-            val entityID = jsonObject.get("entity_id").asInt
+            val entityID = jsonObject.get("hotel_id").asInt
             val checkInDate = jsonObject.get("check_in_date").asString
             val checkOutDate = jsonObject.get("check_out_date").asString
             val guests = jsonObject.get("guests").asInt
-            val citta = jsonObject.get("citta").asString
 
             val prenotazione: PrenotazioneData = if (type == "hotel") {
                 val hotelName = jsonObject.get("hotel_name").asString
@@ -132,18 +125,16 @@ class PrenotazioniEffettuate : Fragment() {
                     checkOutDate = checkOutDate,
                     hotelGuests = guests,
                     nome = hotelName,
-                    citta = citta,
                     tipoPrenotazione = TipoPrenotazione.HOTEL)
             } else {
-                val restaurantName = jsonObject.get("restaurant_name").asString
+                val restaurantid = jsonObject.get("id").asInt
                 val reservationDate = jsonObject.get("reservation_date").asString
                 val reservationTime = jsonObject.get("reservation_time").asString
                 PrenotazioneData(
-                    id = id,
-                    idRistorante = entityID,
+                    id = restaurantid,
+                    idRistorante = 2,
                     dataPrenotazione = reservationDate,
                     restaurantGuests = guests,
-                    nome = restaurantName,
                     orarioPrenotazione = reservationTime,
                     tipoPrenotazione = TipoPrenotazione.RISTORANTE)
             }
