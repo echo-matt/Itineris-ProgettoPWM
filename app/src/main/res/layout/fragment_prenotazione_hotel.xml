@@ -1,0 +1,150 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Prenota Hotel"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textCheckIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Seleziona la data\n del check-in"
+                app:layout_constraintBottom_toBottomOf="@+id/editTextCheckIn"
+                app:layout_constraintEnd_toStartOf="@+id/editTextCheckIn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editTextCheckIn" />
+
+            <EditText
+                android:id="@+id/editTextCheckIn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:hint="Data check-In"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textCheckIn"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+            <TextView
+                android:id="@+id/textCheckOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Seleziona la data\n del check-out"
+                app:layout_constraintBottom_toBottomOf="@+id/editTextCheckOut"
+                app:layout_constraintEnd_toEndOf="@+id/textCheckIn"
+                app:layout_constraintStart_toStartOf="@+id/textCheckIn"
+                app:layout_constraintTop_toTopOf="@+id/editTextCheckOut" />
+
+            <EditText
+                android:id="@+id/editTextCheckOut"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:hint="Data check-Out"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textCheckOut"
+                app:layout_constraintTop_toBottomOf="@+id/editTextCheckIn" />
+
+            <TextView
+                android:id="@+id/ospitiText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="Seleziona il numero \n di ospiti: "
+                app:layout_constraintTop_toBottomOf="@id/textCheckOut"
+                app:layout_constraintEnd_toEndOf="@+id/textCheckOut"
+                app:layout_constraintStart_toStartOf="@+id/textCheckOut"
+                 />
+
+            <Spinner
+                android:id="@+id/spinnernumero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/guests_array"
+                android:spinnerMode="dialog"
+                app:layout_constraintBottom_toBottomOf="@+id/ospitiText"
+                app:layout_constraintEnd_toEndOf="@+id/editTextCheckOut"
+                app:layout_constraintStart_toStartOf="@+id/editTextCheckOut"
+                app:layout_constraintTop_toTopOf="@+id/ospitiText" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ospitiText">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buttonSubmit"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:text="Prenota"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/cartButton"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/cartButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        app:icon="@drawable/baseline_shopping_cart_24"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/buttonSubmit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/buttonSubmit"
+                        app:layout_constraintTop_toTopOf="@+id/buttonSubmit" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,18 +5,18 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.gson.JsonObject
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentDettagliHotelBinding
 import com.matteopaterno.progettopwm.info.InfoFragment
-import com.matteopaterno.progettopwm.prenotazioni.PrenotazioneFragment
+import com.matteopaterno.progettopwm.prenotazioni.PrenotazioneHotelFragment
 import com.matteopaterno.progettopwm.recensioni.RecensioniFragment
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
 import okhttp3.ResponseBody
@@ -47,7 +47,7 @@ class DettagliHotelFragment : Fragment() {
 
         binding.bottonePrenota.setOnClickListener{
 
-            val fragment = PrenotazioneFragment.newInstance(hotel!!)
+            val fragment = PrenotazioneHotelFragment.newInstance(hotel!!)
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
 
             transaction.replace(R.id.fragment_container, fragment)

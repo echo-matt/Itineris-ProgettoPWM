@@ -1,20 +1,15 @@
 package com.matteopaterno.progettopwm.prenotazioni
 
-data class HotelPrenotazioneData(
-
+data class PrenotazioneData(
     val id: Int?,
-    val userId: Int?,
-    val hotelNome: String?,
-    val checkInDate: String,
-    val checkOutDate: String,
-    val guests: Int,
-    var paymentStatus: String
+    val nome: String?,
+    val posizione: String?,
+    val checkInDate: String?,
+    val checkOutDate: String?,
+    val citta: String?,
+    val tipoPrenotazione: ReservationType
 )
 
-data class RistorantePrenotazioneData(
-    val id: Int?,
-    val userId: Int?,
-    val ristoranteNome: String?,
-    val data: String,
-    val guests: Int
-)
+enum class ReservationType {
+    HOTEL, RISTORANTE
+}

@@ -2,35 +2,21 @@ package com.matteopaterno.progettopwm.prenotazioni
 
 class Carrello {
 
-    private val prenotazioniHotel: MutableList<HotelPrenotazioneData> = mutableListOf()
-    private val prenotazioniRistoranti: MutableList<RistorantePrenotazioneData> = mutableListOf()
+    private val prenotazioni : MutableList<PrenotazioneData> = mutableListOf()
 
-    fun aggiungiPrenotazioneHotel(prenotazione: HotelPrenotazioneData){
-        prenotazioniHotel.add(prenotazione)
+    fun aggiungiPrenotazione(prenotazione: PrenotazioneData){
+        prenotazioni.add(prenotazione)
+    }
+    fun rimuoviPrenotazione(prenotazione: PrenotazioneData){
+        prenotazioni.remove(prenotazione)
     }
 
-    fun aggiungiPrenotazioneRistorante(prenotazione: RistorantePrenotazioneData){
-        prenotazioniRistoranti.add(prenotazione)
+    fun getPrenotazioni(): MutableList<PrenotazioneData> {
+        return prenotazioni
     }
 
-    fun rimuoviPrenotazioneHotel(prenotazione: HotelPrenotazioneData){
-        prenotazioniHotel.remove(prenotazione)
-    }
-
-    fun rimuoviPrenotazioneRistorante(prenotazione: RistorantePrenotazioneData){
-        prenotazioniRistoranti.remove(prenotazione)
-    }
-
-    fun getPrenotazioneHotel(): MutableList<HotelPrenotazioneData> {
-        return prenotazioniHotel
-    }
-
-    fun getPrenotazioneRistorante(): MutableList<RistorantePrenotazioneData> {
-        return prenotazioniRistoranti
-    }
 
     fun svuotaCarrello(){
-        prenotazioniHotel.clear()
-        prenotazioniRistoranti.clear()
+        prenotazioni.clear()
     }
 }
