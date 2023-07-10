@@ -6,18 +6,26 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.matteopaterno.progettopwm.R
+import com.matteopaterno.progettopwm.attrazioni.AttrazioniAdapter
 import com.matteopaterno.progettopwm.attrazioni.AttrazioniDataDBRequest
+import com.matteopaterno.progettopwm.attrazioni.AttrazioniDataListHolder
 import com.matteopaterno.progettopwm.attrazioni.AttrazioniFragment
 import com.matteopaterno.progettopwm.databinding.ActivityHomeBinding
+import com.matteopaterno.progettopwm.hotel.HotelAdapter
 import com.matteopaterno.progettopwm.hotel.HotelDataDBRequest
+import com.matteopaterno.progettopwm.hotel.HotelDataListHolder
 import com.matteopaterno.progettopwm.hotel.HotelFragment
 import com.matteopaterno.progettopwm.profile.ProfileFragment
-import com.matteopaterno.progettopwm.recensioni.RecensioniHotelDataDBRequest
+import com.matteopaterno.progettopwm.ristoranti.RistorantiAdapter
 import com.matteopaterno.progettopwm.ristoranti.RistorantiDataDBRequest
+import com.matteopaterno.progettopwm.ristoranti.RistorantiDataListHolder
 import com.matteopaterno.progettopwm.ristoranti.RistorantiFragment
 
 class HomeActivity : AppCompatActivity(){
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var hotelAdapter: HotelAdapter
+    private lateinit var ristorantiAdapter: RistorantiAdapter
+    private lateinit var attrazioniAdapter: AttrazioniAdapter
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,16 +46,25 @@ class HomeActivity : AppCompatActivity(){
         }
 
         val hotelDataRepo = HotelDataDBRequest()
-        hotelDataRepo.createHotelList {  } //Creo la lista degli hotel quando starta l'activity
+        val hotelAdapter = HotelAdapter(HotelDataListHolder.hotelDataList)
+        hotelDataRepo.createHotelList {hotelList ->
+            HotelDataListHolder.hotelDataList.addAll(hotelList)
+            hotelAdapter.notifyDataSetChanged()
+        } //Creo la lista degli hotel quando starta l'activity
 
         val ristorantiDataRepo = RistorantiDataDBRequest()
-        ristorantiDataRepo.createRistorantiList {  }
+        val ristorantiAdapter = RistorantiAdapter(RistorantiDataListHolder.RistorantiDataList)
+        ristorantiDataRepo.createRistorantiList { ristorantiList ->
+            RistorantiDataListHolder.RistorantiDataList.addAll(ristorantiList)
+            ristorantiAdapter.notifyDataSetChanged() // Update the adapter with new data
+        }
 
-        val recensioniHotelDataRepo = RecensioniHotelDataDBRequest()
-        recensioniHotelDataRepo.createRecensioniList { }
-
-        val attrazioniDataHotelRepo = AttrazioniDataDBRequest()
-        attrazioniDataHotelRepo.createAttrazioniList {  }
+        val attrazioniDataRepo = AttrazioniDataDBRequest()
+        val attrazioniAdapter = AttrazioniAdapter(AttrazioniDataListHolder.AttrazioniDataList)
+        attrazioniDataRepo.createAttrazioniList { attrazioniList ->
+            AttrazioniDataListHolder.AttrazioniDataList.addAll(attrazioniList)
+            attrazioniAdapter.notifyDataSetChanged() // Update the adapter with new data
+        }
 
     }
 

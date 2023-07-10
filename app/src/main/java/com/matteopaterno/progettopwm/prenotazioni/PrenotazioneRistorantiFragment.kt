@@ -30,8 +30,8 @@ class PrenotazioneRistorantiFragment : Fragment() {
     private lateinit var loginPreferences : SharedPreferences
     private lateinit var loginPrefsEditor : SharedPreferences.Editor
     private lateinit var dataPrenotazione : String
-    private lateinit var checkOutDateString : String
     private var guests = 0
+    private var orarioPrenotazione : String = ""
 
     private var ristorante: RistorantiData? = null
 
@@ -86,7 +86,7 @@ class PrenotazioneRistorantiFragment : Fragment() {
             }
         }
 
-        lateinit var orarioPrenotazione : String
+
        binding.timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
            val orarioSelezionato = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)
            orarioPrenotazione = orarioSelezionato
@@ -105,11 +105,14 @@ class PrenotazioneRistorantiFragment : Fragment() {
 
             val prenotazione = PrenotazioneData(
                 id = randId,
+                idRistorante = ristorante?.id,
                 nome = ristorante?.nome,
                 posizione = ristorante?.posizione,
                 citta = ristorante?.citta,
                 tipoPrenotazione = tipoPrenotazione,
-                orarioPrenotazione = orarioPrenotazione
+                restaurantGuests = guests,
+                orarioPrenotazione = orarioPrenotazione,
+                dataPrenotazione = dataPrenotazione
             )
 
                 ManagerCarrello.aggiungiAlCarrello(prenotazione)

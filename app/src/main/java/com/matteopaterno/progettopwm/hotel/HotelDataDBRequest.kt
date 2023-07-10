@@ -30,6 +30,7 @@ class HotelDataDBRequest {
                                 val hotelAddress = jsonObject?.get("posizione")?.asString
                                 val hotelRating = jsonObject?.get("rating")?.asFloat
                                 val hotelCitta = jsonObject?.get("citta")?.asString
+                                val hotelCosto = jsonObject?.get("costo")?.asDouble
                                 //Setto i dati del singolo hotel con quelli appena recuperati dal server
                                 data.add(
                                     HotelData(
@@ -38,7 +39,7 @@ class HotelDataDBRequest {
                                         hotelAddress,
                                         hotelRating,
                                         hotelCitta,
-                                        50.0
+                                        hotelCosto
                                     )
                                 )
                             }

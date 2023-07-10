@@ -7,10 +7,6 @@ object ManagerCarrello {
         carrello.aggiungiPrenotazione(prenotazione)
     }
 
-    fun rimuoviDalCarrello(prenotazione: PrenotazioneData){
-        carrello.rimuoviPrenotazione(prenotazione)
-    }
-
     fun svuotaCarrello(){
         carrello.svuotaCarrello()
     }

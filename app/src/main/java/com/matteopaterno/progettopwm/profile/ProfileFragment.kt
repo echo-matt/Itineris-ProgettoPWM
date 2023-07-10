@@ -5,22 +5,17 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TableRow
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.gson.JsonObject
 import com.matteopaterno.progettopwm.MainActivity
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentProfileBinding
-import com.matteopaterno.progettopwm.prenotazioni.Carrello
 import com.matteopaterno.progettopwm.prenotazioni.CarrelloFragment
-import com.matteopaterno.progettopwm.prenotazioni.ManagerCarrello
+import com.matteopaterno.progettopwm.prenotazioni.PrenotazioniEffettuate
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -70,8 +65,6 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(layoutInflater)
-        binding.tablePrenotazioni.removeAllViews()
-
 
         loginPreferences = requireActivity().getSharedPreferences("loginPrefs", MODE_PRIVATE)
 
@@ -92,6 +85,12 @@ class ProfileFragment : Fragment() {
 
         binding.logoutButton.setOnClickListener {
             logoutUser()
+        }
+
+        binding.buttonPrenotazioni.setOnClickListener {
+            val fragment = PrenotazioniEffettuate()
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, fragment).commit()
         }
 
         return binding.root

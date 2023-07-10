@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.matteopaterno.progettopwm.databinding.RecensioneDesignBinding
 
-class RecensioniAdapter(private val reviews: List<RecensioniHotelData>): RecyclerView.Adapter<RecensioniAdapter.ViewHolder>(){
+class RecensioniAdapter<T>(private val reviews: List<T>): RecyclerView.Adapter<RecensioniAdapter<T>.ViewHolder>(){
 
     inner class ViewHolder(binding: RecensioneDesignBinding) : RecyclerView.ViewHolder(binding.root){
 
@@ -29,8 +29,14 @@ class RecensioniAdapter(private val reviews: List<RecensioniHotelData>): Recycle
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = reviews[position]
 
-        holder.textViewUserName.text = currentItem.nomeUtente
-        holder.ratingBar.rating = currentItem.rating!!
-        holder.textViewComment.text = currentItem.testo
+        if (currentItem is RecensioniHotelData){
+            holder.textViewUserName.text = currentItem.nomeUtente
+            holder.ratingBar.rating = currentItem.rating!!
+            holder.textViewComment.text = currentItem.testo
+        }else if (currentItem is RecensioniRistorantiData){
+            holder.textViewUserName.text = currentItem.nomeUtente
+            holder.ratingBar.rating = currentItem.rating!!
+            holder.textViewComment.text = currentItem.testo
+        }
     }
 }

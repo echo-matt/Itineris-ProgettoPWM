@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment
 import com.google.gson.JsonObject
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentDettagliRistorantiBinding
-import com.matteopaterno.progettopwm.recensioni.RecensioniFragment
+import com.matteopaterno.progettopwm.prenotazioni.PrenotazioneRistorantiFragment
+import com.matteopaterno.progettopwm.recensioni.RecensioniDataDBRequest
+import com.matteopaterno.progettopwm.recensioni.RecensioniRistorantiFragment
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -23,6 +25,13 @@ import java.io.ByteArrayInputStream
 class DettagliRistorantiFragment : Fragment() {
     private lateinit var binding: FragmentDettagliRistorantiBinding
     private var ristorante: RistorantiData? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val recensioniHotelDataRepo = RecensioniDataDBRequest(false)
+        recensioniHotelDataRepo.createRecensioniRistorantiList(ristorante?.id!!){}
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,29 +45,26 @@ class DettagliRistorantiFragment : Fragment() {
         binding.ratingBar.rating = ristorante?.rating!!
         val ristoranteId = ristorante?.id
 
+        binding.bottonePrenota.setOnClickListener {
+            val fragment = PrenotazioneRistorantiFragment.newInstance(ristorante!!)
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
 
-        binding.recensioni.setOnClickListener {
-            val recensioniFragment = parentFragmentManager.findFragmentByTag("RecensioniRistorante")
-
-            if (recensioniFragment == null) {
-                val startFragmentIsRecension = RecensioniFragment()
-                parentFragmentManager.beginTransaction()
-                    .replace(binding.fragmentContainerView.id, startFragmentIsRecension, "RecensioniRistorante")
-                    .commit()
-            }
+            transaction.replace(R.id.fragment_container, fragment)
+                .addToBackStack("Fragment Prenotazioni")
+                .commit()
         }
 
+
         binding.recensioni.setOnClickListener {
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.replace(binding.fragmentContainerView.id, RecensioniFragment())?.commit()
+            val fragment = RecensioniRistorantiFragment.newInstance(ristorante!!)
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(binding.fragmentContainerView.id, fragment).commit()
         }
 
         binding.info.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.replace(binding.fragmentContainerView.id, InfoRistorante())?.commit()
         }
-
-        binding.recensioni.callOnClick()
 
 
         getRistoranteImage(ristoranteId)
@@ -122,7 +128,6 @@ class DettagliRistorantiFragment : Fragment() {
             }
         )
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

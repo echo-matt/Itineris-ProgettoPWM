@@ -6,9 +6,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RecensioniDataDBRequest(forHotel: Boolean) {
-
-
+class RecensioniHotelDataDBRequest2(forHotel: Boolean) {
     var forHotel = forHotel
 
     fun createRecensioniList(hotelId: Int, ristoranteId: Int, callback: (List<Any>) -> Unit) {

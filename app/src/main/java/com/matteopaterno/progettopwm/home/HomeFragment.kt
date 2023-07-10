@@ -28,6 +28,7 @@ class HomeFragment : Fragment(), HotelAdapter.OnItemClickListener, RistorantiAda
     private lateinit var ristorantiAdapter: RistorantiAdapter
     private lateinit var attrazioniAdapter: AttrazioniAdapter
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
@@ -49,6 +50,7 @@ class HomeFragment : Fragment(), HotelAdapter.OnItemClickListener, RistorantiAda
         attrazioniAdapter = AttrazioniAdapter(AttrazioniDataListHolder.AttrazioniDataList)
         attrazioniAdapter.setOnItemClickListener(this)
         binding.attrazioniRecyclerView.adapter = attrazioniAdapter
+
 
         return binding.root
     }

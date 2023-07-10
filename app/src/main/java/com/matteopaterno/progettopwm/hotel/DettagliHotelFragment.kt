@@ -17,9 +17,9 @@ import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentDettagliHotelBinding
 import com.matteopaterno.progettopwm.info.InfoFragment
 import com.matteopaterno.progettopwm.prenotazioni.PrenotazioneHotelFragment
-import com.matteopaterno.progettopwm.recensioni.RecensioniFragment
+import com.matteopaterno.progettopwm.recensioni.RecensioniDataDBRequest
+import com.matteopaterno.progettopwm.recensioni.RecensioniHotelFragment
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
-import com.matteopaterno.progettopwm.ristoranti.RecensioniRistorante
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,6 +31,13 @@ class DettagliHotelFragment : Fragment() {
 
     private lateinit var binding: FragmentDettagliHotelBinding
     private var hotel: HotelData? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val recensioniHotelDataRepo = RecensioniDataDBRequest(true)
+        recensioniHotelDataRepo.createRecensioniHotelList(hotel?.id!!) { }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,29 +64,14 @@ class DettagliHotelFragment : Fragment() {
         }
 
 
-        /*binding.recensioniButton.setOnClickListener {
-            val fragment = RecensioniFragment.newInstance(hotel!!)
+        binding.recensioniButton.setOnClickListener {
+            val fragment = RecensioniHotelFragment.newInstance(hotel!!)
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
 
             transaction.replace(binding.fragmentContainerView.id, fragment)
                 .addToBackStack("Fragment Recensioni")
                 .commit()
         }
-
-         */
-
-        binding.recensioniButton.setOnClickListener {
-            val recensioniButtonFragment = parentFragmentManager.findFragmentByTag("RecensioniHotel")
-
-            if (recensioniButtonFragment == null) {
-                val startFragmentIsRecension = RecensioniFragment()
-                parentFragmentManager.beginTransaction()
-                    .replace(binding.fragmentContainerView.id, startFragmentIsRecension, "RecensioniHotel")
-                    .commit()
-            }
-        }
-
-        binding.recensioniButton.callOnClick()
 
         binding.infoButton.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()

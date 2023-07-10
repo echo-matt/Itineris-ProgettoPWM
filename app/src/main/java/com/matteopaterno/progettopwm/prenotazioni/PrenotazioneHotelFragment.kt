@@ -34,9 +34,9 @@ class PrenotazioneHotelFragment : Fragment() {
     private lateinit var loginPrefsEditor : SharedPreferences.Editor
     private lateinit var checkInDateString : String
     private lateinit var checkOutDateString : String
-    private var guests = 0
-
+    private var guests: Int = 1
     private var hotel: HotelData? = null
+    private var costo: Double = hotel?.costo?: 0.0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +77,7 @@ class PrenotazioneHotelFragment : Fragment() {
             showDatePicker(checkInFocused)
         }
 
+
         val spinner = binding.spinnernumero
         val intArray: Array<Int?> = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item,intArray)
@@ -95,11 +96,9 @@ class PrenotazioneHotelFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
+                guests = 1
             }
         }
-
-
-
 
 
 
@@ -114,7 +113,7 @@ class PrenotazioneHotelFragment : Fragment() {
 
             val numberOfDay = calculateNumberOfDays(checkInDate!!, checkOutDate!!)
 
-            val costo = (hotel?.costo!! * numberOfDay.toDouble()) + (20*guests)
+            costo = (hotel?.costo!! * numberOfDay.toDouble()) + (20*guests)
             val costoString = costo.toString()
             binding2.costoTotale.text = "Costo totale della prenotazione: $costoString €"
 
@@ -146,6 +145,12 @@ class PrenotazioneHotelFragment : Fragment() {
         binding.cartButton.setOnClickListener {
             val randId = (1..50000).random()
             val tipoPrenotazione = TipoPrenotazione.HOTEL
+            val checkInDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(checkInDateString)
+            val checkOutDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(checkOutDateString)
+
+            val numberOfDay = calculateNumberOfDays(checkInDate!!, checkOutDate!!)
+
+            costo = (hotel?.costo!! * numberOfDay.toDouble()) + (20*guests)
 
             val prenotazione = PrenotazioneData(
                 id = randId,
@@ -154,7 +159,11 @@ class PrenotazioneHotelFragment : Fragment() {
                 checkInDate = checkInDateString,
                 checkOutDate = checkOutDateString,
                 citta = hotel?.citta,
-                tipoPrenotazione = tipoPrenotazione
+                tipoPrenotazione = tipoPrenotazione,
+                costoPrenotazione = costo,
+                idHotel = hotel?.id,
+                hotelGuests = guests,
+                dataPrenotazione = null
             )
 
             ManagerCarrello.aggiungiAlCarrello(prenotazione)
@@ -222,7 +231,6 @@ class PrenotazioneHotelFragment : Fragment() {
                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                    if (response.isSuccessful){
                        Toast.makeText(activity, "Prenotazione effettuata", Toast.LENGTH_SHORT).show()
-
                    }else{
                        Toast.makeText(activity, "Errore nella richiesta", Toast.LENGTH_SHORT).show()
                    }

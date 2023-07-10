@@ -9,8 +9,9 @@ data class RecensioniHotelData(
 )
 
 data class RecensioniRistorantiData(
-    val testo: String,
-    val user_id : Int,
-    val ristorante_id : Int,
-    val rating: Float
+    val testo: String?,
+    val user_id : Int?,
+    val nomeUtente: String?,
+    val ristorante_id : Int?,
+    val rating: Float?
 )
