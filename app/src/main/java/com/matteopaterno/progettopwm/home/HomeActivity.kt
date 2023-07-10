@@ -11,7 +11,6 @@ import com.matteopaterno.progettopwm.attrazioni.AttrazioniFragment
 import com.matteopaterno.progettopwm.databinding.ActivityHomeBinding
 import com.matteopaterno.progettopwm.hotel.HotelDataDBRequest
 import com.matteopaterno.progettopwm.hotel.HotelFragment
-import com.matteopaterno.progettopwm.meteo.MeteoFragment
 import com.matteopaterno.progettopwm.profile.ProfileFragment
 import com.matteopaterno.progettopwm.recensioni.RecensioniHotelDataDBRequest
 import com.matteopaterno.progettopwm.ristoranti.RistorantiDataDBRequest
@@ -58,13 +57,6 @@ class HomeActivity : AppCompatActivity(){
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.setReorderingAllowed(true)
                 transaction.replace(binding.fragmentContainer.id, RistorantiFragment()).commit()
-                return@OnNavigationItemSelectedListener true
-            }
-
-            R.id.meteo ->{
-                val transaction = supportFragmentManager.beginTransaction()
-                transaction.setReorderingAllowed(true)
-                transaction.replace(binding.fragmentContainer.id, MeteoFragment()).commit()
                 return@OnNavigationItemSelectedListener true
             }
 
