@@ -4,7 +4,6 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentCarrelloBinding
 
@@ -29,95 +29,108 @@ class CarrelloFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCarrelloBinding.inflate(layoutInflater)
-        val prenotazioniHotel = ManagerCarrello.getPrenotazioniHotel()
+        val prenotazioniHotel = ManagerCarrello.getPrenotazioni()
 
         populateTable(prenotazioniHotel)
 
-        binding.button.setOnClickListener {
-            val f = PrenotazioneHotelFragment()
-            for (item in prenotazioniHotel){
-            }
-        }
 
         return binding.root
     }
 
-    private fun populateTable(prenotazioniHotel: List<HotelPrenotazioneData>) {
+    private fun populateTable(prenotazioni: List<PrenotazioneData>) {
         binding.tablePrenotazioni.removeAllViews()
-        if (prenotazioniHotel.size > 0) {
 
+        if (prenotazioni.isNotEmpty()) {
             val headerRow = TableRow(requireContext())
+
             val headerIdTextView = TextView(context)
             headerIdTextView.text = "ID"
+            val headerTipoTextView = TextView(context)
+            headerTipoTextView.text = "Tipo"
             val headerNomeTextView = TextView(context)
-            headerNomeTextView.text = "Nome Hotel"
-            val headerCheckInTextView = TextView(context)
-            headerCheckInTextView.text = "Check-In"
-            val headerCheckOutTextView = TextView(context)
-            headerCheckOutTextView.text = "Check-Out"
+            headerNomeTextView.text = "Nome"
+            val headerInfoTextView = TextView(context)
+            headerInfoTextView.text = "Info"
 
-            val params = TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+            val params = TableRow.LayoutParams(
+                0,
+                TableRow.LayoutParams.WRAP_CONTENT,
+                1f
+            )
 
             headerIdTextView.layoutParams = params
             headerIdTextView.setTypeface(null, Typeface.BOLD)
             headerIdTextView.setTextColor(resources.getColor(R.color.white))
 
+            headerTipoTextView.layoutParams = params
+            headerTipoTextView.setTypeface(null, Typeface.BOLD)
+            headerTipoTextView.setTextColor(resources.getColor(R.color.white))
+
             headerNomeTextView.layoutParams = params
             headerNomeTextView.setTypeface(null, Typeface.BOLD)
             headerNomeTextView.setTextColor(resources.getColor(R.color.white))
 
-            headerCheckInTextView.layoutParams = params
-            headerCheckInTextView.setTypeface(null, Typeface.BOLD)
-            headerCheckInTextView.setTextColor(resources.getColor(R.color.white))
-
-            headerCheckOutTextView.layoutParams = params
-            headerCheckOutTextView.setTypeface(null, Typeface.BOLD)
-            headerCheckOutTextView.setTextColor(resources.getColor(R.color.white))
+            headerInfoTextView.layoutParams = params
+            headerInfoTextView.setTypeface(null, Typeface.BOLD)
+            headerInfoTextView.setTextColor(resources.getColor(R.color.white))
 
             headerRow.addView(headerIdTextView)
+            headerRow.addView(headerTipoTextView)
             headerRow.addView(headerNomeTextView)
-            headerRow.addView(headerCheckInTextView)
-            headerRow.addView(headerCheckOutTextView)
+            headerRow.addView(headerInfoTextView)
 
             val bgColor = ContextCompat.getColor(requireContext(), R.color.blue)
             setTableRowBackground(headerRow, bgColor)
 
             binding.tablePrenotazioni.addView(headerRow)
 
-            for (item in prenotazioniHotel) {
+            for (item in prenotazioni) {
                 val newRow = TableRow(requireContext())
 
                 val itemIdTextView = TextView(context)
                 itemIdTextView.text = item.id.toString()
+                val itemTipoTextView = TextView(context)
+                itemTipoTextView.text = when (item.tipoPrenotazione) {
+                    TipoPrenotazione.HOTEL -> "Hotel"
+                    TipoPrenotazione.RISTORANTE -> "Restaurant"
+                }
                 val itemNomeTextView = TextView(context)
-                itemNomeTextView.text = item.hotelNome
-                val itemCheckInTextView = TextView(context)
-                itemCheckInTextView.text = item.checkInDate
-                val itemCheckOutTextView = TextView(context)
-                itemCheckOutTextView.text = item.checkOutDate
+                itemNomeTextView.text = item.nome
+                val itemInfoTextView = TextView(context)
 
                 val params = TableRow.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    0,
+                    TableRow.LayoutParams.WRAP_CONTENT,
                     1f
                 )
+
                 itemIdTextView.layoutParams = params
+                itemTipoTextView.layoutParams = params
                 itemNomeTextView.layoutParams = params
-                itemCheckInTextView.layoutParams = params
-                itemCheckOutTextView.layoutParams = params
+                itemInfoTextView.layoutParams = params
+
+                itemInfoTextView.setTypeface(null, Typeface.BOLD)
+
+                if (item.tipoPrenotazione == TipoPrenotazione.HOTEL) {
+                    itemInfoTextView.text = "Check-in: ${item.checkInDate}\nCheck-out: ${item.checkOutDate}"
+                } else if (item.tipoPrenotazione == TipoPrenotazione.RISTORANTE) {
+                    itemInfoTextView.text = "Reservation Time: ${item.orarioPrenotazione}"
+                }
 
                 newRow.addView(itemIdTextView)
+                newRow.addView(itemTipoTextView)
                 newRow.addView(itemNomeTextView)
-                newRow.addView(itemCheckInTextView)
-                newRow.addView(itemCheckOutTextView)
+                newRow.addView(itemInfoTextView)
 
                 binding.tablePrenotazioni.addView(newRow)
-
             }
         } else {
             Toast.makeText(context, "Nessuna prenotazione", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+
 
     private fun setTableRowBackground(tableRow: TableRow, color: Int) {
         val drawable: Drawable = GradientDrawable().apply {

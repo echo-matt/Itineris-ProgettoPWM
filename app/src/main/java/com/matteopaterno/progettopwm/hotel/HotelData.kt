@@ -1,5 +1,4 @@
 package com.matteopaterno.progettopwm.hotel
-import android.graphics.Bitmap
 import com.google.gson.annotations.SerializedName
 
 data class HotelData(
@@ -18,4 +17,7 @@ data class HotelData(
 
     @SerializedName("citta")
     var citta: String?,
+
+    @SerializedName("costo")
+    var costo: Double?
 )

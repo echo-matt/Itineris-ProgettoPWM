@@ -8,25 +8,21 @@
     tools:context=".prenotazioni.CarrelloFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TableLayout
-        android:id="@+id/tablePrenotazioni"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tablePrenotazioni"
-        app:layout_constraintTop_toBottomOf="@+id/tablePrenotazioni" />
+        <TableLayout
+            android:id="@+id/tablePrenotazioni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

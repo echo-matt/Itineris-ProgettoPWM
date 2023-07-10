@@ -36,14 +36,14 @@
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:text="Seleziona la data \n della prenotazione: "
-                app:layout_constraintBottom_toBottomOf="@id/editTextCheckIn"
-                app:layout_constraintEnd_toStartOf="@id/editTextCheckIn"
+                app:layout_constraintBottom_toBottomOf="@id/editTextDataPrenotazione"
+                app:layout_constraintEnd_toStartOf="@id/editTextDataPrenotazione"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/editTextCheckIn" />
+                app:layout_constraintTop_toTopOf="@id/editTextDataPrenotazione" />
 
 
             <EditText
-                android:id="@+id/editTextCheckIn"
+                android:id="@+id/editTextDataPrenotazione"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -72,13 +72,12 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="16dp"
-
                 android:gravity="center"
                 android:hint="Orario"
                 android:timePickerMode="spinner"
-                app:layout_constraintEnd_toEndOf="@+id/editTextCheckIn"
-                app:layout_constraintStart_toStartOf="@+id/editTextCheckIn"
-                app:layout_constraintTop_toBottomOf="@+id/editTextCheckIn" />
+                app:layout_constraintEnd_toEndOf="@+id/editTextDataPrenotazione"
+                app:layout_constraintStart_toStartOf="@+id/editTextDataPrenotazione"
+                app:layout_constraintTop_toBottomOf="@+id/editTextDataPrenotazione" />
 
             <TextView
                 android:id="@+id/ospitiText"

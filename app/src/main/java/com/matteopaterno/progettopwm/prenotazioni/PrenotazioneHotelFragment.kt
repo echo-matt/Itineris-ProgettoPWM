@@ -1,5 +1,6 @@
 package com.matteopaterno.progettopwm.prenotazioni
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,6 +14,7 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.gson.JsonObject
+import com.matteopaterno.progettopwm.databinding.DialogPaymentBinding
 import com.matteopaterno.progettopwm.databinding.FragmentPrenotazioneHotelBinding
 import com.matteopaterno.progettopwm.hotel.HotelData
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
@@ -26,6 +28,7 @@ import java.util.Locale
 
 class PrenotazioneHotelFragment : Fragment() {
     private lateinit var binding: FragmentPrenotazioneHotelBinding
+    private lateinit var bindingPagamento: DialogPaymentBinding
     private lateinit var calendar: Calendar
     private lateinit var loginPreferences : SharedPreferences
     private lateinit var loginPrefsEditor : SharedPreferences.Editor
@@ -52,8 +55,12 @@ class PrenotazioneHotelFragment : Fragment() {
 
         val idUtente = loginPreferences.getString("id", "")?.toInt()
 
+
+
         var checkInFocused: Boolean
         binding = FragmentPrenotazioneHotelBinding.inflate(layoutInflater)
+
+
         calendar = Calendar.getInstance()
 
         binding.editTextCheckIn.isFocusable = false
@@ -69,7 +76,6 @@ class PrenotazioneHotelFragment : Fragment() {
             checkInFocused = false
             showDatePicker(checkInFocused)
         }
-
 
         val spinner = binding.spinnernumero
         val intArray: Array<Int?> = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
@@ -93,20 +99,74 @@ class PrenotazioneHotelFragment : Fragment() {
         }
 
 
+
+
+
+
         binding.buttonSubmit.setOnClickListener{
-            effetuaPrenotazione(idUtente, hotel?.id, checkInDateString, checkOutDateString, guests)
+            val dialogBuilder = AlertDialog.Builder(requireContext())
+            val binding2 = DialogPaymentBinding.inflate(layoutInflater)
+            val dialogView = binding2.root
+            dialogBuilder.setView(dialogView)
+
+            val checkInDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(checkInDateString)
+            val checkOutDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(checkOutDateString)
+
+            val numberOfDay = calculateNumberOfDays(checkInDate!!, checkOutDate!!)
+
+            val costo = (hotel?.costo!! * numberOfDay.toDouble()) + (20*guests)
+            val costoString = costo.toString()
+            binding2.costoTotale.text = "Costo totale della prenotazione: $costoString €"
+
+            val amountText = binding2.editTextAmount
+
+            dialogBuilder.setTitle("Pagamento")
+            dialogBuilder.setPositiveButton("Paga"){_, _ ->
+                val amount = amountText.text.toString()
+                if (amount.isNotEmpty()){
+                    val double = amount.toDouble()
+                    if (double == costo!!){
+                        Toast.makeText(context, "Pagamento effettuato, prenotazione registrata", Toast.LENGTH_SHORT).show()
+                        effetuaPrenotazione(idUtente, hotel?.id, checkInDateString, checkOutDateString, guests)
+                    }else if (double > costo!!){
+                        Toast.makeText(context, "Inserisci l'importo esatto", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Toast.makeText(context, "Pagamento rifiutato", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            dialogBuilder.setNegativeButton("Cancella"){dialog, _ ->
+                dialog.dismiss()
+            }
+
+            dialogBuilder.create().show()
         }
-
-
 
         binding.cartButton.setOnClickListener {
             val randId = (1..50000).random()
-            val prenotazione = PrenotazioneData(randId, hotel?.nome, hotel?.posizione, checkInDateString, checkOutDateString, hotel?.citta, ReservationType.HOTEL)
+            val tipoPrenotazione = TipoPrenotazione.HOTEL
+
+            val prenotazione = PrenotazioneData(
+                id = randId,
+                nome = hotel?.nome,
+                posizione = hotel?.posizione,
+                checkInDate = checkInDateString,
+                checkOutDate = checkOutDateString,
+                citta = hotel?.citta,
+                tipoPrenotazione = tipoPrenotazione
+            )
+
             ManagerCarrello.aggiungiAlCarrello(prenotazione)
-            Toast.makeText(context, "Prenotazione aggiunta", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Prenotazione aggiunta al carrello", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root
+    }
+
+    private fun calculateNumberOfDays(checkInDate: Date, checkOutDate: Date): Long {
+        val diff = checkOutDate.time - checkInDate.time
+        return diff / (24 * 60 * 60 * 1000)
     }
 
     private fun showDatePicker(checkInFocused: Boolean) {
@@ -131,17 +191,17 @@ class PrenotazioneHotelFragment : Fragment() {
     private fun updateCheckInDate() {
         val formato = "yyyy-MM-dd"
         val dateFormat = SimpleDateFormat(formato, Locale.US)
-        binding.editTextCheckIn.setText(dateFormat.format(calendar.time))
-        val date = Date()
-        checkInDateString = dateFormat.format(date)
+        val selectedDate = calendar.time
+        binding.editTextCheckIn.setText(dateFormat.format(selectedDate))
+        checkInDateString = dateFormat.format(selectedDate)
     }
 
     private fun updateCheckOutDate() {
         val formato = "yyyy-MM-dd"
         val dateFormat = SimpleDateFormat(formato, Locale.US)
-        binding.editTextCheckOut.setText(dateFormat.format(calendar.time))
-        val date = Date()
-        checkOutDateString = dateFormat.format(date)
+        val selectedDate = calendar.time
+        binding.editTextCheckOut.setText(dateFormat.format(selectedDate))
+        checkOutDateString = dateFormat.format(selectedDate)
     }
     fun setHotel(hotel: HotelData){
         this.hotel = hotel

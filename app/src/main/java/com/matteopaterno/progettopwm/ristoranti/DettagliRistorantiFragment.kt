@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.google.gson.JsonObject
 import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.databinding.FragmentDettagliRistorantiBinding
+import com.matteopaterno.progettopwm.prenotazioni.PrenotazioneRistorantiFragment
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -34,6 +35,15 @@ class DettagliRistorantiFragment : Fragment() {
         binding.textPosizione.text = ristorante?.posizione
         binding.ratingBar.rating = ristorante?.rating!!
         val ristoranteId = ristorante?.id
+
+        binding.bottonePrenota.setOnClickListener {
+            val fragment = PrenotazioneRistorantiFragment.newInstance(ristorante!!)
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+
+            transaction.replace(R.id.fragment_container, fragment)
+                .addToBackStack("Fragment Prenotazioni")
+                .commit()
+        }
 
 
         binding.menu.setOnClickListener {

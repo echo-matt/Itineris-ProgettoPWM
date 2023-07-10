@@ -162,8 +162,7 @@ class DettagliHotelFragment : Fragment() {
                                 val serviceName = serviceObject.get("nome").asString
                                 if (!imagePath.isNullOrEmpty() && !serviceName.isNullOrEmpty()) {
                                     val imageView = getServiceImageView(i)
-                                    val textView = getServiceNameTextView(i)
-                                    setProfileImg(imagePath, imageView)
+                                    setServiceImg(imagePath, imageView)
                                     setServiceName(serviceName, i)
                                 }
                             }
@@ -185,17 +184,15 @@ class DettagliHotelFragment : Fragment() {
 
 
     private fun getServiceImageView(serviceId: Int): ImageView {
-        return when (serviceId) {
-            0 -> binding.image1
-            1 -> binding.image2
-            2 -> binding.image3
-            3 -> binding.image4
-            4 -> binding.image5
-            5 -> binding.image6
-            6 -> binding.image7
-            7 -> binding.image8
-            else -> binding.image1
-        }
+
+        val imageViewId = arrayOf(
+            binding.image1, binding.image2, binding.image3, binding.image4,
+            binding.image5, binding.image6, binding.image7, binding.image8
+        )
+
+        val index = serviceId % imageViewId.size
+        return imageViewId[index]
+
     }
 
     private fun setServiceName(serviceName: String, serviceIndex: Int) {
@@ -204,21 +201,17 @@ class DettagliHotelFragment : Fragment() {
     }
 
     private fun getServiceNameTextView(serviceIndex: Int): TextView {
-        return when (serviceIndex) {
-            0 -> binding.textViewService1
-            1 -> binding.textViewService2
-            2 -> binding.textViewService3
-            3 -> binding.textViewService4
-            4 -> binding.textViewService5
-            5 -> binding.textViewService6
-            6 -> binding.textViewService7
-            7 -> binding.textViewService8
-            else -> throw IllegalArgumentException("Indice servizio non valido: $serviceIndex")
-        }
+        val textViews = arrayOf(
+            binding.textViewService1, binding.textViewService2, binding.textViewService3, binding.textViewService4,
+            binding.textViewService5, binding.textViewService6, binding.textViewService7, binding.textViewService8
+            // Add more TextView references here if needed
+        )
+        val index = serviceIndex % textViews.size
+        return textViews[index]
     }
 
 
-    private fun setProfileImg(url: String, imageView: ImageView) {
+    private fun setServiceImg(url: String, imageView: ImageView) {
         if (imageView != null){
             ClientNetwork.retrofit.image(url).enqueue(
                 object : Callback<ResponseBody> {

@@ -13,7 +13,7 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.gson.JsonObject
-import com.matteopaterno.progettopwm.databinding.FragmentPrenotazioneHotelBinding
+import com.matteopaterno.progettopwm.databinding.FragmentPrenotazioneRistoranteBinding
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
 import com.matteopaterno.progettopwm.ristoranti.RistorantiData
 import retrofit2.Call
@@ -25,11 +25,11 @@ import java.util.Date
 import java.util.Locale
 
 class PrenotazioneRistorantiFragment : Fragment() {
-    private lateinit var binding: FragmentPrenotazioneHotelBinding
+    private lateinit var binding: FragmentPrenotazioneRistoranteBinding
     private lateinit var calendar: Calendar
     private lateinit var loginPreferences : SharedPreferences
     private lateinit var loginPrefsEditor : SharedPreferences.Editor
-    private lateinit var checkInDateString : String
+    private lateinit var dataPrenotazione : String
     private lateinit var checkOutDateString : String
     private var guests = 0
 
@@ -53,22 +53,16 @@ class PrenotazioneRistorantiFragment : Fragment() {
         val idUtente = loginPreferences.getString("id", "")?.toInt()
 
         var checkInFocused: Boolean
-        binding = FragmentPrenotazioneHotelBinding.inflate(layoutInflater)
+        binding = FragmentPrenotazioneRistoranteBinding.inflate(layoutInflater)
         calendar = Calendar.getInstance()
 
-        binding.editTextCheckIn.isFocusable = false
-        binding.editTextCheckIn.isClickable = true
-        binding.editTextCheckIn.setOnClickListener{
+        binding.editTextDataPrenotazione.isFocusable = false
+        binding.editTextDataPrenotazione.isClickable = true
+        binding.editTextDataPrenotazione.setOnClickListener{
             checkInFocused = true
             showDatePicker(checkInFocused)
         }
 
-        binding.editTextCheckOut.isFocusable = false
-        binding.editTextCheckOut.isClickable = true
-        binding.editTextCheckOut.setOnClickListener{
-            checkInFocused = false
-            showDatePicker(checkInFocused)
-        }
 
 
         val spinner = binding.spinnernumero
@@ -92,19 +86,35 @@ class PrenotazioneRistorantiFragment : Fragment() {
             }
         }
 
+        lateinit var orarioPrenotazione : String
+       binding.timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
+           val orarioSelezionato = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)
+           orarioPrenotazione = orarioSelezionato
+       }
+
 
         binding.buttonSubmit.setOnClickListener{
-            effetuaPrenotazione(idUtente, ristorante?.id, checkInDateString, checkOutDateString, guests)
+            effetuaPrenotazione(idUtente, ristorante?.id, dataPrenotazione, guests, orarioPrenotazione)
         }
 
 
 
         binding.cartButton.setOnClickListener {
             val randId = (1..50000).random()
-            val prenotazione = PrenotazioneData(randId, ristorante?.nome, ristorante?.posizione, checkInDateString, checkOutDateString, ristorante?.citta, ReservationType.RISTORANTE)
-            ManagerCarrello.aggiungiAlCarrello(prenotazione)
-            Toast.makeText(context, "Prenotazione aggiunta", Toast.LENGTH_SHORT).show()
-        }
+            val tipoPrenotazione = TipoPrenotazione.RISTORANTE
+
+            val prenotazione = PrenotazioneData(
+                id = randId,
+                nome = ristorante?.nome,
+                posizione = ristorante?.posizione,
+                citta = ristorante?.citta,
+                tipoPrenotazione = tipoPrenotazione,
+                orarioPrenotazione = orarioPrenotazione
+            )
+
+                ManagerCarrello.aggiungiAlCarrello(prenotazione)
+                Toast.makeText(context, "Prenotazione aggiunta al carrello", Toast.LENGTH_SHORT).show()
+            }
 
         return binding.root
     }
@@ -115,11 +125,8 @@ class PrenotazioneRistorantiFragment : Fragment() {
             calendar.set(Calendar.MONTH, month)
             calendar.set(Calendar.DAY_OF_MONTH, day)
             if (checkInFocused){
-                updateCheckInDate()
-            }else{
-                updateCheckOutDate()
+                updateDataPrenotazione()
             }
-
         }
 
         DatePickerDialog(
@@ -128,20 +135,12 @@ class PrenotazioneRistorantiFragment : Fragment() {
 
     }
 
-    private fun updateCheckInDate() {
+    private fun updateDataPrenotazione() {
         val formato = "yyyy-MM-dd"
         val dateFormat = SimpleDateFormat(formato, Locale.US)
-        binding.editTextCheckIn.setText(dateFormat.format(calendar.time))
+        binding.editTextDataPrenotazione.setText(dateFormat.format(calendar.time))
         val date = Date()
-        checkInDateString = dateFormat.format(date)
-    }
-
-    private fun updateCheckOutDate() {
-        val formato = "yyyy-MM-dd"
-        val dateFormat = SimpleDateFormat(formato, Locale.US)
-        binding.editTextCheckOut.setText(dateFormat.format(calendar.time))
-        val date = Date()
-        checkOutDateString = dateFormat.format(date)
+        dataPrenotazione = dateFormat.format(date)
     }
     fun setRistorante (ristorante: RistorantiData){
         this.ristorante = ristorante
@@ -154,8 +153,13 @@ class PrenotazioneRistorantiFragment : Fragment() {
             return fragment
         }
     }
-    fun effetuaPrenotazione(idUtente: Int?, idHotel: Int?, checkInDate: String, checkOutDate: String, guests: Int, ){
-       val query = "INSERT INTO webmobile.hotel_reservations (user_id, hotel_id, check_in_date, check_out_date, guests, payment_status) VALUES ('${idUtente}', '${idHotel}', '${checkInDate.toString()}', '${checkOutDate.toString()}', '${guests}', 'Pagato')"
+    fun effetuaPrenotazione(
+        idUtente: Int?,
+        idRistorante: Int?,
+        dataPrenotazione: String,
+        guests: Int,
+        orarioPrenotazione: String, ){
+       val query = "INSERT INTO webmobile.restaurant_reservation (user_id, ristorante_id, guests, reservation_date, reservation_time) VALUES ('${idUtente}', '${idRistorante}','${guests}', '${dataPrenotazione}', '${orarioPrenotazione}')"
 
        ClientNetwork.retrofit.insert(query).enqueue(
            object : Callback<JsonObject> {

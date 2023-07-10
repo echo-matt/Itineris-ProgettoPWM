@@ -1,8 +1,6 @@
 package com.matteopaterno.progettopwm.hotel
 
-import android.widget.Toast
 import com.google.gson.JsonObject
-import com.matteopaterno.progettopwm.R
 import com.matteopaterno.progettopwm.retrofit.ClientNetwork
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,7 +37,8 @@ class HotelDataDBRequest {
                                         hotelName,
                                         hotelAddress,
                                         hotelRating,
-                                        hotelCitta
+                                        hotelCitta,
+                                        50.0
                                     )
                                 )
                             }
